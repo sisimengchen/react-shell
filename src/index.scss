@@ -2,18 +2,16 @@
  * 基础通用样式
  */
 
-
 /* 让高度真正100％ */
 
 html {
-	height: 100%;
+  height: 100%;
 }
 
 body {
-	min-height: 100%;
-	-webkit-overflow-scrolling: touch;
+  min-height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
-
 
 /* 要注意表单元素并不继承父级 font 的问题 */
 
@@ -22,65 +20,59 @@ button,
 input,
 select,
 textarea {
-	font: 12px/1.5 arial, simsun;
+  font: 12px/1.5 arial, simsun;
 }
 
 input,
 select,
 textarea {
-	font-size: 100%;
+  font-size: 100%;
 }
-
 
 /* 让链接在 hover 状态下显示下划线 */
 
 a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
-
 
 /* 默认不显示下划线，保持页面简洁 */
 
 ins,
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
-
 
 /*唯一元素noScript*/
 
 noscript {
-	position: relative;
-	display: block;
-	z-index: 999999;
-	background: #FFF8DB;
-	color: #333;
-	line-height: 34px;
-	text-align: center;
-	border-bottom: 1px solid #ddd;
-	a {
-		text-decoration: underline;
-		cursor: pointer;
-	}
+  position: relative;
+  display: block;
+  z-index: 999999;
+  background: #fff8db;
+  color: #333;
+  line-height: 34px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
-
 
 /*IE9以下提示条*/
 
 .m-browserupdate {
-	background: #FFF8DB;
-	color: #333;
-	line-height: 34px;
-	text-align: center;
-	border-bottom: 1px solid #ddd;
-	a {
-		text-decoration: underline;
-	}
+  background: #fff8db;
+  color: #333;
+  line-height: 34px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  a {
+    text-decoration: underline;
+  }
 }
 
-
 /*  重设各标签默认样式 */
-
 
 /* 内外边距通常让各个浏览器样式的表现位置不同 */
 
@@ -122,10 +114,9 @@ hgroup,
 menu,
 nav,
 section {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
-
 
 /* 重设 HTML5 标签, IE 需要在 js 中 createElement(TAG) */
 
@@ -140,64 +131,57 @@ hgroup,
 menu,
 nav,
 section {
-	display: block;
+  display: block;
 }
-
 
 /* HTML5 媒体文件跟 img 保持一致 */
 
 audio,
 canvas,
 video {
-	display: inline-block;
-	*display: inline;
-	*zoom: 1;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
 }
-
 
 /* 去掉各Table  cell 的边距并让其边重合 */
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
-
 
 /* IE bug fixed: th 不继承 text-align*/
 
 th {
-	text-align: inherit;
+  text-align: inherit;
 }
-
 
 /* 去除默认边框 */
 
 fieldset,
 img {
-	border: 0;
+  border: 0;
 }
-
 
 /* ie6 7 8(q) bug 显示为行内表现 */
 
 iframe {
-	display: block;
+  display: block;
 }
-
 
 /* 去掉 firefox 下此元素的边框 */
 
 abbr,
 acronym {
-	border: 0;
-	font-variant: normal;
+  border: 0;
+  font-variant: normal;
 }
-
 
 /* 一致的 del 样式 */
 
 del {
-	text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 address,
@@ -210,18 +194,16 @@ th,
 var,
 i,
 b {
-	font-style: normal;
-	font-weight: 500;
+  font-style: normal;
+  font-weight: 500;
 }
-
 
 /* 去掉列表前的标识, li 会继承 */
 
 ol,
 ul {
-	list-style: none;
+  list-style: none;
 }
-
 
 /* 来自yahoo, 让标题都自定义, 适应多个系统应用 */
 
@@ -232,57 +214,53 @@ h4,
 h5,
 h6,
 b {
-	font-size: 100%;
-	font-weight: 500;
+  font-size: 100%;
+  font-weight: 500;
 }
 
 q:before,
 q:after {
-	content: '';
+  content: "";
 }
-
 
 /* 统一上标和下标 */
 
 sub,
 sup {
-	font-size: 75%;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline;
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
 
 sup {
-	top: -0.5em;
+  top: -0.5em;
 }
 
 sub {
-	bottom: -0.25em;
+  bottom: -0.25em;
 }
-
 
 /* 原有reset，上下居中显示，并恢复正确的inline-block */
 
 img,
 input,
 select {
-	vertical-align: middle;
-	display: inline-block;
+  vertical-align: middle;
+  display: inline-block;
 }
-
 
 /* 去掉flash的虚线 */
 
 embed,
 object {
-	outline: none;
+  outline: none;
 }
-
 
 /* 为运行 Windows 8 的设备上的 Internet Explorer 10 触摸式浏览设置默认行为 */
 
 canvas {
-	-ms-touch-action: double-tap-zoom;
+  -ms-touch-action: double-tap-zoom;
 }
 
 @bs: 100rem;
@@ -295,10 +273,12 @@ canvas {
 html,
 body {
   font: 14px Arial, Helvetica, sans-serif;
-//   color: #666;
-//   background-color: #eee;
+  //   color: #666;
+  //   background-color: #eee;
   -webkit-text-size-adjust: none;
-  -webkit-tap-highlight-color: transparent;
+  color: #1a1a1a;
+  background: #f6f6f6;
+  -webkit-tap-highlight-color: rgba(26, 26, 26, 0);
 }
 
 html {
@@ -329,7 +309,7 @@ input,
 select,
 textarea {
   font: 14px Arial, Helvetica, sans-serif;
-//   color: #666;
+  //   color: #666;
   outline: none;
 }
 
@@ -343,7 +323,7 @@ input.fixAKeyboard:focus {
   width: 100%;
 }
 
-#header{
+#header {
   width: 100%;
 }
 

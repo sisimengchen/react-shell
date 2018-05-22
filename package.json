@@ -7,17 +7,10 @@
     "dev": "webpack-dev-server --inline --progress --config scripts/config.js",
     "build": "node scripts/build.js"
   },
-  "keywords": [
-    "react",
-    "shell"
-  ],
+  "keywords": ["react", "shell"],
   "author": "mengchen",
   "license": "MIT",
-  "browserslist": [
-    "> 0.1%",
-    "last 10 versions",
-    "not ie <= 9"
-  ],
+  "browserslist": ["> 0.1%", "last 10 versions", "not ie <= 9"],
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
@@ -46,6 +39,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -53,6 +47,9 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
-    "redux-saga": "^0.16.0"
+    "redux-actions": "^2.3.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^3.2.6"
   }
 }

@@ -18,4 +18,17 @@ module.exports = function(app) {
       }
     }));
   });
+
+  app.get('/api/user', (req, res) => {
+    res.json(Mock.mock({
+      code: 200,
+      message: '',
+      data: {
+        id: 'sisimengchen@gmail.com',
+        name: 'mengchen'
+      },
+      version: '1.0.0',
+      now: +new Date()
+    }));
+  });
 };

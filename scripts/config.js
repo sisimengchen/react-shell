@@ -244,11 +244,14 @@ function getConfig() {
     resolve: {
       extensions: ['.js'],
       alias: {
-        '@util': resolve('src/util/index.js'),
+        '@utils': resolve('src/utils/index.js'),
         '@components': resolve('src/components/'),
         '@layouts': resolve('src/layouts/'),
         '@pages': resolve('src/pages/'),
-        '@store': resolve('src/store.js')
+        '@store': resolve('src/redux/store'),
+        '@actions': resolve('src/redux/actions'),
+        '@history': resolve('src/history.js'),
+        '@services': resolve('src/services/')
       }
     },
     module: {

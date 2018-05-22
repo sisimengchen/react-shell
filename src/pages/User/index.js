@@ -1,39 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { request } from '@util';
 
-class UserIndex extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  componentWillMount() {
-    const { match } = this.props;
-    const { userId } = match.params;
-    request('/wap/ajax/list', {
-      method: 'GET'
-    })
-      .then((data) => {
-        this.setState({
-          data: data,
-          userId: userId
-        });
-      })
-      .catch(e => console.error(e));
-  }
-
+class UserIndex extends Component {
   render() {
-    const { state, props } = this;
-    const { data, userId } = state;
-    const { pending, logged, test } = props;
-    return <div>user/{userId}</div>;
+    const { match, user } = this.props;
+    const { userId } = match.params;
+    return (
+      <div>
+        <p>当前路由的用户id:{userId}</p>
+        <p>当前登录的用户id:{user.id}</p>
+      </div>
+    );
   }
 }
 
 const stateToProps = ({ userState }) => ({
-  pending: userState.pending,
-  logged: userState.logged
+  user: userState.user
 });
 
 export default connect(stateToProps)(UserIndex);

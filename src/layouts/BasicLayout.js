@@ -1,16 +1,29 @@
-import React, { PureComponent } from 'react';
+/**
+ * @file 基础布局
+ * @author mengchen <sisimengchen@gmail.com>
+ */
+import React, { Component, Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
-
+import Header from '@components/Header';
+import Home from '@pages/Home';
+import Login from '@pages/User/Login';
+import Shell from '@pages/Shell';
 import UserIndex from '@pages/User';
-import UserList from '@pages/User/List';
+import Exception404 from '@pages/Exception/404';
 
-class BasicLayout extends PureComponent {
+class BasicLayout extends Component {
   render() {
     return (
-      <Switch>
-        <Route exact path="/user" component={UserList} />
-        <Route path="/user/:userId" component={UserIndex} />
-      </Switch>
+      <Fragment>
+        <Header isGoBack={false} hideBack={true} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/shell" component={Shell} />
+          <Route path="/user/:userId" component={UserIndex} />
+          <Route component={Exception404} />
+        </Switch>
+      </Fragment>
     );
   }
 }

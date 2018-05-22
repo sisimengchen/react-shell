@@ -1,30 +1,28 @@
-import React from 'react';
+/**
+ * @file 用户权限校验路由组件
+ * @author mengchen <sisimengchen@gmail.com>
+ * @module components/Authorized/AuthorizedRoute
+ */
+import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Authorized from './Authorized';
-import store from '@store';
+import { fetchUser } from '@actions/user';
 
-class AuthorizedRoute extends React.Component {
-  componentWillMount() {
-    console.log('componentWillMount');
-    setTimeout(() => {
-      store.dispatch({
-        type: 'SET_LOGGED_USER',
-        logged: true
-      });
-    }, 500);
-  }
-
-  componentDidMount() {
-    console.log('componentDidMount');
+class AuthorizedRoute extends Component {
+  constructor(props) {
+    super();
+    const { dispatch } = props;
+    // 请求一下用户数据，校验权限
+    dispatch(fetchUser());
   }
 
   render() {
-    console.log('render');
-    const { component: Component, render, pending, logged, redirectPath, ...rest } = this.props;
+    const { component: Component, render, isFetched, isLogin, user, redirectPath, ...rest } = this.props;
     const authority = {
-      pending: pending,
-      logged: logged
+      isFetched: isFetched,
+      isLogin: isLogin,
+      user: user
     };
     return (
       <Authorized
@@ -38,8 +36,9 @@ class AuthorizedRoute extends React.Component {
 }
 
 const stateToProps = ({ userState }) => ({
-  pending: userState.pending,
-  logged: userState.logged
+  isFetched: userState.isFetched,
+  isLogin: userState.isLogin,
+  user: userState.user
 });
 
 export default connect(stateToProps)(AuthorizedRoute);
