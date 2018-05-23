@@ -32,7 +32,13 @@ class Header extends Component {
     return (
       <Fragment>
         <header id="header">
-          {hideBack ? <span className="g-back">&nbsp;</span> : <span onClick={e => this.goback(e)}>返回</span>}
+          {hideBack ? (
+            <span className="g-back">&nbsp;</span>
+          ) : (
+            <span className="g-back" onClick={e => this.goback(e)}>
+              返回
+            </span>
+          )}
           <h1 className="g-title">{header.title}</h1>
           <span className="g-user" onClick={e => this.handleUserClick(e)}>
             {isLogin ? user.name : '登录'}

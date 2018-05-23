@@ -5,6 +5,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import './index.scss';
+
 const config = {
   403: {
     img: 'https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg',
@@ -23,34 +25,17 @@ const config = {
   }
 };
 
-const Wrapper = styled.div `
-  position: relative;
-  height: 100%;
-`;
-
-const ImgBlock = styled.div `
-  flex: 2;
-`;
-
-const Img = styled.div `
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: contain;
-`;
-
-const ContentBlock = styled.div `
-  flex: 1;
-`;
-
 export default ({ type, title, desc, img, actions, ...rest }) => {
   const pageType = type in config ? type : '404';
   return (
-    <Wrapper {...rest}>
-      <ImgBlock>
-        <Img style={{ backgroundImage: `url(${img || config[pageType].img})` }} />
-      </ImgBlock>
-      <ContentBlock>ss</ContentBlock>
-    </Wrapper>
+    <div id="exception" {...rest}>
+      <div className="image-block">
+        <img src={img || config[pageType].img} />
+      </div>
+      <div className="content-block">
+        <h1>{title || config[pageType].title}</h1>
+        <div className="desc">{desc || config[pageType].desc}</div>
+      </div>
+    </div>
   );
 };
