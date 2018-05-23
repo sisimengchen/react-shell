@@ -322,6 +322,7 @@ input.fixAKeyboard:focus {
 #app {
   position: relative;
   width: 100%;
+  min-height: 100vh;
 }
 
 @media (min-width: 640px) {

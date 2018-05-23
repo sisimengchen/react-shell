@@ -7,6 +7,9 @@ const defaultState = {
   },
   navigator: {
     isShow: false
+  },
+  footer: {
+    isShow: true
   }
 };
 

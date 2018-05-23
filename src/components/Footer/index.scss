@@ -1,0 +1,24 @@
+#footer {
+  padding: 10px 16px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  bottom: 0;
+  .g-links {
+    margin-bottom: 8px;
+    a {
+      margin-right: 40px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  .g-copyright {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 14px;
+  }
+}

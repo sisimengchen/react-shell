@@ -6,6 +6,7 @@ import React, { Component, Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Header from '@components/Header';
+import Footer from '@components/Footer';
 
 import Home from '@pages/Home';
 import Login from '@pages/User/Login';
@@ -18,7 +19,6 @@ class BasicLayout extends Component {
     return (
       <Fragment>
         <Header />
-        {/* <Navigator /> */}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
@@ -26,6 +26,7 @@ class BasicLayout extends Component {
           <Route path="/user/:userId" component={UserIndex} />
           <Route component={Exception404} />
         </Switch>
+        <Footer />
       </Fragment>
     );
   }
