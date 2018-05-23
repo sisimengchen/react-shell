@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const version = process.env.VERSION || require('../package.json').version;
 
 const env = process.env.NODE_ENV || 'development';
+const target = process.env.TARGET || 'spa';
 
 const resolve = (p = '') => path.resolve(__dirname, '../', p);
 
@@ -188,12 +189,13 @@ const getRules = () => {
 const getPlugin = () => {
   const plugins = [
     new webpack.DefinePlugin({
-      __VERSION__: JSON.stringify(version),
-      __ENV__: JSON.stringify(env)
+      'process.env.VERSION': JSON.stringify(version),
+      'process.env.NODE_ENV': JSON.stringify(env),
+      'process.env.TARGET': JSON.stringify(target)
     }), // 全局变量替换
     new webpack.NoEmitOnErrorsPlugin(), // 编译错误时跳过输出阶段
     new HtmlWebpackPlugin({
-      filename: resolve('dist/index.html'),
+      filename: target === 'githubpages' ? resolve('docs/index.html') : resolve('dist/index.html'),
       template: resolve('index.html'),
       inject: true,
       minify:
@@ -238,7 +240,7 @@ function getConfig() {
     entry: resolve('src/app.js'),
     output: {
       filename: 'index.js',
-      path: resolve('dist'),
+      path: target === 'githubpages' ? resolve('docs') : resolve('dist'),
       publicPath: env === 'development' ? '/' : './'
     },
     resolve: {

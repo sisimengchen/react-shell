@@ -1,3 +1,3 @@
 import React from 'react';
 
-export default () => <div>500</div>;
+export default () => <div id="main">500</div>;

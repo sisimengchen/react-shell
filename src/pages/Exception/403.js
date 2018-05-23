@@ -1,3 +1,3 @@
 import React from 'react';
 
-export default () => <div>403</div>;
+export default () => <div id="main">403</div>;

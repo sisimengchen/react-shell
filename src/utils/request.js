@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import history from '@history';
 
+const API_ROOT = 'https://easy-mock.com/mock/5b04275f5fa2b20fbca4a45b';
+
 const codeMessage = {
   100: 'continue',
   101: 'switching protocols',
@@ -90,6 +92,7 @@ export function request(url, options) {
     };
     newOptions.body = JSON.stringify(newOptions.body);
   }
+  url = process.env.TARGET === 'githubpages' ? `${API_ROOT}${url}` : url;
   return fetch(url, newOptions)
     .then(checkStatus)
     .then((response) => {

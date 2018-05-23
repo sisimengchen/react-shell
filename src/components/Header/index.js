@@ -2,10 +2,11 @@
  * @file 页头组件
  * @author mengchen <sisimengchen@gmail.com>
  */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import history from '@history';
+import Navigator from '@components/Navigator';
 
 const Wrapper = styled.header `
   position: relative;
@@ -21,11 +22,13 @@ const Wrapper = styled.header `
 const Back = styled.span `
   flex: 1;
   text-align: left;
+  cursor: pointer;
 `;
 
 const User = styled.span `
   flex: 1;
   text-align: right;
+  cursor: pointer;
 `;
 
 const Title = styled.h1 `
@@ -34,6 +37,13 @@ const Title = styled.h1 `
 `;
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isShowNavigator: false
+    };
+  }
+
   goback() {
     const { isGoBack } = this.props;
     if (isGoBack) {
@@ -43,28 +53,44 @@ class Header extends Component {
 
   handleUserClick() {
     const { isLogin } = this.props;
+    const { isShowNavigator } = this.state;
     if (isLogin) {
-      console.log('登录了显示菜单');
+      // console.log(!isShowNavigator);
+      this.setState({
+        isShowNavigator: !isShowNavigator
+      });
     } else {
       console.log('未登录去登录页');
     }
   }
 
   render() {
-    const { isLogin, user, hideBack } = this.props;
+    const { isLogin, user, hideBack, title } = this.props;
+    const { isShowNavigator } = this.state;
     return (
-      <Wrapper>
-        {hideBack ? <Back>&nbsp;</Back> : <Back onClick={e => this.goback(e)}>返回</Back>}
-        <Title>标题</Title>
-        <User onClick={e => this.handleUserClick(e)}>{isLogin ? user.name : '登录'}</User>
-      </Wrapper>
+      <Fragment>
+        <Wrapper>
+          {hideBack ? <Back>&nbsp;</Back> : <Back onClick={e => this.goback(e)}>返回</Back>}
+          <Title>{title}</Title>
+          <User onClick={e => this.handleUserClick(e)}>{isLogin ? user.name : '登录'}</User>
+        </Wrapper>
+        <Navigator isShow={isShowNavigator} />
+      </Fragment>
     );
   }
 }
 
-const stateToProps = ({ userState }) => ({
+Header.defaultProps = {
+  isLogin: false,
+  user: undefined,
+  hideBack: false,
+  isGoBack: true
+};
+
+const stateToProps = ({ userState, pageState }) => ({
   isLogin: userState.isLogin,
-  user: userState.user
+  user: userState.user,
+  title: pageState.title
 });
 
 export default connect(stateToProps)(Header);

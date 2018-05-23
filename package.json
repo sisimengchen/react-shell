@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config scripts/config.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "github": "cross-env TARGET=githubpages npm run build"
   },
   "keywords": ["react", "shell"],
   "author": "mengchen",
@@ -19,6 +20,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "chalk": "^2.4.1",
+    "cross-env": "^5.1.6",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-config-lmfe": "0.0.1",

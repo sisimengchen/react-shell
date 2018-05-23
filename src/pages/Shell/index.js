@@ -6,7 +6,7 @@ class ShellPage extends Component {
   render() {
     const { counter, dispatch } = this.props;
     return (
-      <div>
+      <div id="main">
         <p>示例</p>
         <p>当前counter：{counter}</p>
         <button onClick={() => dispatch(increment(1))}>increment</button>

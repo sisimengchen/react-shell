@@ -1,6 +1,6 @@
 import React from 'react';
 export default () => (
-  <div>
+  <div id="main">
     <p>首页</p>
   </div>
 );
