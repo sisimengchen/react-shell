@@ -8,10 +8,17 @@
     "build": "node scripts/build.js",
     "github": "cross-env TARGET=githubpages npm run build"
   },
-  "keywords": ["react", "shell"],
+  "keywords": [
+    "react",
+    "shell"
+  ],
   "author": "mengchen",
   "license": "MIT",
-  "browserslist": ["> 0.1%", "last 10 versions", "not ie <= 9"],
+  "browserslist": [
+    "> 0.1%",
+    "last 10 versions",
+    "not ie <= 9"
+  ],
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
@@ -48,6 +55,7 @@
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-transition-group": "^2.3.1",
     "redux": "^4.0.0",
     "redux-actions": "^2.3.2",
     "redux-logger": "^3.0.6",

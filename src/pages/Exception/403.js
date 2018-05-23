@@ -1,3 +1,4 @@
 import React from 'react';
+import Exception from '@components/Exception';
 
-export default () => <div id="main">403</div>;
+export default () => <Exception type="403" style={{ minHeight: 500, height: '80%' }} />;

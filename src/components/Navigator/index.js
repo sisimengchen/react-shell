@@ -5,25 +5,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import { CSSTransition } from 'react-transition-group';
+import { setNavigatorShow } from '@actions/page';
 
-const Wrapper = styled.nav `
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  padding: 0 16px;
-  margin: 0 auto;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
-`;
-
-const Item = styled.p `
-  display: flex;
-  background: #fff;
-  height: 52px;
-  align-items: center;
-  border-top: 1px solid #ebebeb;
-`;
+import './index.scss';
 
 const navItems = [
   { text: '首页', link: '/' },
@@ -31,33 +16,45 @@ const navItems = [
   { text: '我的主页', link: '/user/123' }
 ];
 
+const renderItems = () => navItems.map((item, index) => (
+    <Link key={index} to={item.link}>
+      <div className="warpper">{item.text}</div>
+    </Link>
+));
+
 class Navigator extends Component {
-  renderItems() {
-    return navItems.map((item, index) => (
-      <Link to={item.link} key={index}>
-        <Item>{item.text}</Item>
-      </Link>
-    ));
+  handleClick() {
+    const { dispatch } = this.props;
+    dispatch(setNavigatorShow(false));
   }
 
   render() {
-    const { isShow, isLogin, user } = this.props;
-    // console.log(isShow);
-    const style = {
-      display: isShow ? 'block' : 'none'
-    };
+    const { isLogin, navigator } = this.props;
     return (
-      <Wrapper style={style}>
-        {this.renderItems()}
-        {isLogin ? <Item>退出账号</Item> : ''}
-      </Wrapper>
+      <CSSTransition in={navigator.isShow} timeout={300} classNames="fade">
+        <nav
+          id="navigator"
+          className={navigator.isShow ? 'fade-enter-done' : 'fade-exit-done'}
+          onClick={e => this.handleClick(e)}
+        >
+          {renderItems()}
+          {isLogin ? (
+            <a>
+              <div className="warpper">退出账号</div>
+            </a>
+          ) : (
+            ''
+          )}
+        </nav>
+      </CSSTransition>
     );
   }
 }
 
-const stateToProps = ({ userState }) => ({
+const stateToProps = ({ userState, pageState }) => ({
   isLogin: userState.isLogin,
-  user: userState.user
+  user: userState.user,
+  navigator: pageState.navigator
 });
 
 export default connect(stateToProps)(Navigator);

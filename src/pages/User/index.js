@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { set } from '@actions/page';
+import { setHeader } from '@actions/page';
 
 class UserIndex extends Component {
   constructor(props) {
     super(props);
     const { dispatch } = this.props;
-    dispatch(set({
-      title: '用户信息页'
-    }));
+    dispatch(setHeader({ title: '我的主页' }));
   }
 
   render() {
