@@ -19,52 +19,90 @@
     }
   }
 }
+#mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 98;
+  height: 100vh;
+  background-color: rgba(26, 26, 26, 0.65);
+}
 
-.fade-enter {
+.pop-enter {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transform: translateY(50%);
 }
 
-.fade-enter-active {
+.pop-enter-active {
   opacity: 1;
   visibility: visible;
   pointer-events: none;
   transform: translateY(0);
 }
 
-.fade-enter-done {
+.pop-enter-done {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-.fade-exit {
+.pop-exit {
   opacity: 1;
   visibility: visible;
   pointer-events: none;
   transform: translateY(0);
 }
 
-.fade-exit-active {
+.pop-exit-active {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transform: translateY(-100%);
+}
+
+.pop-exit-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
+.fade-enter {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+}
+
+.fade-enter-done {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.fade-exit {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .fade-exit-done {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-100%);
-}
-
-.fade-appear {
-  //   background-color: #000;
-}
-
-.fade-appear-active {
 }

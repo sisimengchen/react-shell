@@ -2,7 +2,7 @@
  * @file 导航组件
  * @author mengchen <sisimengchen@gmail.com>
  */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
@@ -31,22 +31,29 @@ class Navigator extends Component {
   render() {
     const { isLogin, navigator } = this.props;
     return (
-      <CSSTransition in={navigator.isShow} timeout={300} classNames="fade">
-        <nav
-          id="navigator"
-          className={navigator.isShow ? 'fade-enter-done' : 'fade-exit-done'}
-          onClick={e => this.handleClick(e)}
-        >
-          {renderItems()}
-          {isLogin ? (
-            <a>
-              <div className="warpper">退出账号</div>
-            </a>
-          ) : (
-            ''
-          )}
-        </nav>
-      </CSSTransition>
+      <Fragment>
+        <CSSTransition in={navigator.isShow} timeout={300} classNames="pop">
+          <nav
+            id="navigator"
+            className={navigator.isShow ? 'pop-enter-done' : 'pop-exit-done'}
+            onClick={e => this.handleClick(e)}
+          >
+            {renderItems()}
+            {isLogin && (
+              <a>
+                <div className="warpper">退出账号</div>
+              </a>
+            )}
+          </nav>
+        </CSSTransition>
+        <CSSTransition in={navigator.isShow} timeout={300} classNames="fade">
+          <div
+            id="mask"
+            className={navigator.isShow ? 'fade-enter-done' : 'fade-exit-done'}
+            onClick={e => this.handleClick(e)}
+          />
+        </CSSTransition>
+      </Fragment>
     );
   }
 }
