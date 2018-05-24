@@ -1,5 +1,6 @@
 'use strict';
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
@@ -197,6 +198,10 @@ const getPlugin = () => {
     new HtmlWebpackPlugin({
       filename: target === 'githubpages' ? resolve('docs/index.html') : resolve('dist/index.html'),
       template: resolve('index.html'),
+      loading: {
+        html: fs.readFileSync(resolve('src/asset/html/loading.html')),
+        css: `<style>${fs.readFileSync(resolve('src/asset/css/loading.css'))}</style>`
+      },
       inject: true,
       minify:
         env === 'development'

@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>react-shell</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no,minimal-ui">
+
   <script>
     window.desginWidth = 750;
     window.refresh = 1;
@@ -40,10 +41,13 @@
     }(window, window.desginWidth, window.refresh);
 
   </script>
+  <%= htmlWebpackPlugin.options.loading.css %>
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <%= htmlWebpackPlugin.options.loading.html %>
+  </div>
   <!-- built files will be auto injected -->
 </body>
 
