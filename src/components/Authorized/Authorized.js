@@ -4,7 +4,7 @@
  * @module components/Authorized/Authorized
  */
 import React, { Component } from 'react';
-
+import ContentLoader, { Facebook } from 'react-content-loader';
 class Authorized extends Component {
   render() {
     const { children, authority, noMatch = null } = this.props;
@@ -12,7 +12,7 @@ class Authorized extends Component {
     const { isFetched, isLogin } = authority;
     if (isFetched) {
       // 用户信息请求状态
-      return <div>加载中...</div>;
+      return <Facebook />;
     } else if (isLogin) {
       // 授权成功过状态
       return childrenRender;
