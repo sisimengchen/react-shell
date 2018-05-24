@@ -199,8 +199,8 @@ const getPlugin = () => {
       filename: target === 'githubpages' ? resolve('docs/index.html') : resolve('dist/index.html'),
       template: resolve('index.html'),
       loading: {
-        html: fs.readFileSync(resolve('src/asset/html/loading.html')),
-        css: `<style>${fs.readFileSync(resolve('src/asset/css/loading.css'))}</style>`
+        html: fs.readFileSync(resolve('src/assets/html/loading.html')),
+        css: `<style>${fs.readFileSync(resolve('src/assets/css/loading.css'))}</style>`
       },
       inject: true,
       minify:
