@@ -5,9 +5,6 @@
 import React, { Component, Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Header from '@components/Header';
-import Footer from '@components/Footer';
-
 import Home from '@pages/Home';
 import Login from '@pages/User/Login';
 import Shell from '@pages/Shell';
@@ -18,7 +15,6 @@ class BasicLayout extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
@@ -26,7 +22,6 @@ class BasicLayout extends Component {
           <Route path="/user/:userId" component={UserIndex} />
           <Route component={Exception404} />
         </Switch>
-        <Footer />
       </Fragment>
     );
   }

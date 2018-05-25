@@ -2,7 +2,6 @@ import { handleActions } from 'redux-actions';
 
 const defaultState = {
   header: {
-    title: '',
     isShow: true
   },
   navigator: {
@@ -15,16 +14,6 @@ const defaultState = {
 
 const reducer = handleActions(
   {
-    'PAGE/SET_HEADER': (state, { payload }) => ({
-      ...state,
-      header: payload
-    }),
-    'PAGE/SET_HEADER_TITLE': (state, { payload }) => ({
-      ...state,
-      header: {
-        title: payload
-      }
-    }),
     'PAGE/SET_HEADER_SHOW': (state, { payload }) => ({
       ...state,
       header: {

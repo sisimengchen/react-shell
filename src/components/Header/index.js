@@ -11,13 +11,6 @@ import { toggleNavigatorShow } from '@actions/page';
 import './index.scss';
 
 class Header extends Component {
-  goback() {
-    const { isGoBack } = this.props;
-    if (isGoBack) {
-      history.goBack();
-    }
-  }
-
   handleUserClick() {
     const { isLogin, dispatch } = this.props;
     if (isLogin) {
@@ -28,20 +21,25 @@ class Header extends Component {
   }
 
   render() {
-    const { isLogin, user, hideBack, header } = this.props;
+    const { title, isBackable, isLogin, userInfo } = this.props;
     return (
       <Fragment>
         <header id="header">
-          {hideBack ? (
-            <span className="g-back">&nbsp;</span>
-          ) : (
-            <span className="g-back" onClick={e => this.goback(e)}>
+          {isBackable ? (
+            <span
+              className="g-back"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
               返回
             </span>
+          ) : (
+            <span className="g-back">&nbsp;</span>
           )}
-          <h1 className="g-title">{header.title}</h1>
+          <h1 className="g-title">{title}</h1>
           <span className="g-user" onClick={e => this.handleUserClick(e)}>
-            {isLogin ? user.name : '登录'}
+            {isLogin ? userInfo.name : '登录'}
           </span>
         </header>
         <Navigator />
@@ -51,16 +49,13 @@ class Header extends Component {
 }
 
 Header.defaultProps = {
-  isLogin: false,
-  user: undefined,
-  hideBack: false,
-  isGoBack: true
+  title: '',
+  isBackable: true
 };
 
-const stateToProps = ({ userState, pageState }) => ({
-  isLogin: userState.isLogin,
-  user: userState.user,
-  header: pageState.header
+const stateToProps = ({ userState }) => ({
+  userInfo: userState.userInfo,
+  isLogin: userState.isLogin
 });
 
 export default connect(stateToProps)(Header);

@@ -2,7 +2,7 @@ const defaultState = {
   isFetched: true,
   isError: false,
   isLogin: false,
-  user: undefined
+  userInfo: undefined
 };
 
 const reducer = (state = defaultState, action) => {
@@ -20,7 +20,7 @@ const reducer = (state = defaultState, action) => {
       isFetched: false,
       isError: false,
       isLogin: true,
-      user: action.payload
+      userInfo: action.payload
     });
     return newstate;
   }

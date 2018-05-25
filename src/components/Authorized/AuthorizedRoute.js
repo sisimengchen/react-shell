@@ -18,11 +18,11 @@ class AuthorizedRoute extends Component {
   }
 
   render() {
-    const { component: Component, render, isFetched, isLogin, user, redirectPath, ...rest } = this.props;
+    const { component: Component, render, isFetched, isLogin, userInfo, redirectPath, ...rest } = this.props;
     const authority = {
       isFetched: isFetched,
       isLogin: isLogin,
-      user: user
+      userInfo: userInfo
     };
     return (
       <Authorized
@@ -38,7 +38,7 @@ class AuthorizedRoute extends Component {
 const stateToProps = ({ userState }) => ({
   isFetched: userState.isFetched,
   isLogin: userState.isLogin,
-  user: userState.user
+  userInfo: userState.userInfo
 });
 
 export default connect(stateToProps)(AuthorizedRoute);

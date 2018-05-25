@@ -1,9 +1,6 @@
 import createBrowserHistory from 'history/createBrowserHistory';
 import createHashHistory from 'history/createHashHistory';
 
-import store from '@store';
-import { setHeaderTitle } from '@actions/page';
-
 const createHistory = process.env.TARGET === 'githubpages' ? createHashHistory : createBrowserHistory;
 
 const history = createHistory({
@@ -12,7 +9,6 @@ const history = createHistory({
 });
 
 const unlisten = history.listen((location, action) => {
-  store.dispatch(setHeaderTitle(''));
   // console.log(`The current URL is ${location.pathname}${location.search}${location.hash}`);
   // console.log(`The last navigation action was ${action}`);
 });

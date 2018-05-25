@@ -60,7 +60,7 @@ class Navigator extends Component {
 
 const stateToProps = ({ userState, pageState }) => ({
   isLogin: userState.isLogin,
-  user: userState.user,
+  userInfo: userState.userInfo,
   navigator: pageState.navigator
 });
 
