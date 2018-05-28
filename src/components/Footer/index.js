@@ -3,41 +3,60 @@
  * @author mengchen <sisimengchen@gmail.com>
  */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+// import { connect } from 'react-redux';
 
 import './index.scss';
 
 const navItems = [
   {
+    id: 'home',
     text: '首页',
     link: '/'
   },
   {
+    id: 'shell',
     text: '壳页',
     link: '/shell'
+  },
+  {
+    id: 'user',
+    text: '我的账户',
+    link: '/user/123'
+  },
+  {
+    id: 'menu',
+    text: '菜单',
+    link: '/menu'
+  },
+  {
+    id: 'more',
+    text: '更多',
+    link: '/more'
   }
 ];
 
 class Footer extends Component {
   render() {
-    const { footer } = this.props;
+    let { footer, acitve } = this.props;
     return (
       <footer id="footer">
-        <div className="g-links">
+        <ul className="g-links">
           {navItems.map((item, index) => (
-            <a key={index} target={item.blankTarget ? '_blank' : '_self'} href={item.link}>
-              {item.text}
-            </a>
+            <li key={index}>
+              <Link
+                className={acitve === item.id ? 'active' : undefined}
+                target={item.blankTarget ? '_blank' : '_self'}
+                to={item.link}
+              >
+                {item.text}
+              </Link>
+            </li>
           ))}
-        </div>
-        <div className="g-copyright">Copyright © 2018 sisimengchen@gmail.com</div>
+        </ul>
       </footer>
     );
   }
 }
 
-const stateToProps = ({ pageState }) => ({
-  footer: pageState.footer
-});
-
-export default connect(stateToProps)(Footer);
+export default Footer;

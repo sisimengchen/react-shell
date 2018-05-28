@@ -16,7 +16,7 @@ class ShellPage extends Component {
           <button onClick={() => dispatch(increment(1))}>increment</button>
           <button onClick={() => dispatch(decrement(1))}>decrement</button>
         </div>
-        <Footer />
+        <Footer acitve="shell" />
       </Fragment>
     );
   }

@@ -5,7 +5,7 @@ const createHistory = process.env.TARGET === 'githubpages' ? createHashHistory :
 
 const history = createHistory({
   getUserConfirmation: (message, callback) => callback(true),
-  forceRefresh: false
+  forceRefresh: true
 });
 
 const unlisten = history.listen((location, action) => {

@@ -14,7 +14,7 @@ class UserIndex extends Component {
           <p>当前路由的用户id:{userId}</p>
           <p>当前登录的用户id:{userInfo.id}</p>
         </div>
-        <Footer />
+        <Footer acitve="user" />
       </Fragment>
     );
   }
