@@ -1,4 +1,5 @@
-#navigator {
+#navigator,
+#nav-overlay {
   background: #fff;
   box-sizing: border-box;
   position: relative;
@@ -90,6 +91,47 @@
           overflow: hidden;
           width: calc(100% + 32px);
         }
+      }
+    }
+  }
+}
+
+#nav-overlay {
+  background: #fff;
+  bottom: 0;
+  box-sizing: border-box;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  overflow-y: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: all 0.1s linear;
+  visibility: hidden;
+  z-index: 1005;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  .container {
+    .header {
+      display: block;
+      .icon {
+        background: url(../../assets/icons/icon-close.svg) no-repeat center
+          center;
+        box-sizing: inherit;
+        color: transparent;
+        display: block;
+        float: right;
+        height: 48px;
+        opacity: 0.8;
+        overflow: hidden;
+        padding: 0;
+        margin: -12px;
+        transition: all 0.1s linear;
+        width: 48px;
+        border: 0;
       }
     }
   }

@@ -10,7 +10,8 @@ export const LOGOUT = 'LOGOUT'; // 登出
 export const ASYNC_START = 'ASYNC_START'; // 异步开始
 export const ASYNC_END = 'ASYNC_END'; // 异步结束
 // UI相关action
-export const UI_BUSY = 'ASYNC_END'; // 异步结束
+export const UI_BUSY = 'UI_BUSY'; // 异步结束
+export const UI_OVERLAY = 'UI_OVERLAY'; // 异步结束
 
 // SHELL相关action
 export const SHELL_INCREMENT = 'SHELL_INCREMENT'; // 加

@@ -1,7 +1,8 @@
-import { UI_BUSY } from '@constants';
+import { UI_BUSY, UI_OVERLAY } from '@constants';
 
 const defaultState = {
-  busy: false
+  busy: false,
+  isOverlay: false
 };
 
 export default (state = defaultState, action) => {
@@ -10,6 +11,14 @@ export default (state = defaultState, action) => {
     return {
       ...state,
       busy: action.payload
+    };
+  }
+
+  if (action.type === UI_OVERLAY) {
+    // 导航 遮罩
+    return {
+      ...state,
+      isOverlay: action.payload
     };
   }
 

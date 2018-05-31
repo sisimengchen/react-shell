@@ -14,7 +14,7 @@ import Login from '@pages/User/Login';
 class App extends Component {
   constructor(props) {
     super();
-    const { dispatch } = props;
+    const { token, dispatch } = props;
     // 请求一下用户数据，校验权限
     dispatch({ type: 'APP_LOAD', payload: Auth.current() });
   }

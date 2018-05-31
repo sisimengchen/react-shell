@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import store from '@store';
+
 import './index.scss';
 
 // 页底公共导航配置
@@ -41,7 +43,7 @@ const navItems = [
   {
     id: 'more',
     text: '更多',
-    link: '/more',
+    link: () => store.dispatch({ type: 'UI_OVERLAY', payload: true }),
     icon: require('../../assets/icons/icon-more.svg'),
     icon_active: require('../../assets/icons/icon-more-active.svg')
   }
@@ -52,18 +54,28 @@ export default () => (
     <ul className="g-links">
       {navItems.map((item, index) => (
         <li key={item.id}>
-          <NavLink
-            activeClassName="active"
-            exact={item.exact}
-            target={item.blankTarget ? '_blank' : '_self'}
-            to={item.link}
-          >
-            <span className="icons">
-              <img src={item.icon} />
-              <img src={item.icon_active} className="active" />
-            </span>
-            <div className="text">{item.text}</div>
-          </NavLink>
+          {typeof item.link === 'function' ? (
+            <a href="javascript:void(0)" onClick={() => store.dispatch({ type: 'UI_OVERLAY', payload: true })}>
+              <span className="icons">
+                <img src={item.icon} />
+                <img src={item.icon_active} className="active" />
+              </span>
+              <div className="text">{item.text}</div>
+            </a>
+          ) : (
+            <NavLink
+              activeClassName="active"
+              exact={item.exact}
+              target={item.blankTarget ? '_blank' : '_self'}
+              to={item.link}
+            >
+              <span className="icons">
+                <img src={item.icon} />
+                <img src={item.icon_active} className="active" />
+              </span>
+              <div className="text">{item.text}</div>
+            </NavLink>
+          )}
         </li>
       ))}
     </ul>

@@ -6,7 +6,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import history from '@history';
 import Navigator from '@components/Navigator';
-// import { toggleNavigatorShow } from '@actions/page';
 
 import './index.scss';
 
