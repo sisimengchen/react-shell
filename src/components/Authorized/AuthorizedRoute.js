@@ -7,22 +7,12 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Authorized from './Authorized';
-import { fetchUser } from '@actions/user';
 
 class AuthorizedRoute extends Component {
-  constructor(props) {
-    super();
-    const { dispatch } = props;
-    // 请求一下用户数据，校验权限
-    dispatch(fetchUser());
-  }
-
   render() {
-    const { component: Component, render, isFetched, isLogin, userInfo, redirectPath, ...rest } = this.props;
+    const { component: Component, render, token, redirectPath, ...rest } = this.props;
     const authority = {
-      isFetched: isFetched,
-      isLogin: isLogin,
-      userInfo: userInfo
+      token
     };
     return (
       <Authorized
@@ -35,10 +25,8 @@ class AuthorizedRoute extends Component {
   }
 }
 
-const stateToProps = ({ userState }) => ({
-  isFetched: userState.isFetched,
-  isLogin: userState.isLogin,
-  userInfo: userState.userInfo
+const mapStateToProps = ({ common }) => ({
+  token: common.token
 });
 
-export default connect(stateToProps)(AuthorizedRoute);
+export default connect(mapStateToProps)(AuthorizedRoute);

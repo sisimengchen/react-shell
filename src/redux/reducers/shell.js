@@ -1,23 +1,25 @@
-import { handleActions } from 'redux-actions';
+import { SHELL_INCREMENT, SHELL_DECREMENT } from '@constants';
 
 const defaultState = {
   counter: 0
 };
 
-const reducer = handleActions(
-  {
+export default (state = defaultState, action) => {
+  if (action.type === SHELL_INCREMENT) {
     // 加
-    'SHELL/INCREMENT': (state, { payload: { amount } }) => ({
+    return {
       ...state,
-      counter: state.counter + amount
-    }),
-    // 减
-    'SHELL/DECREMENT': (state, { payload: { amount } }) => ({
-      ...state,
-      counter: state.counter - amount
-    })
-  },
-  defaultState
-);
+      counter: state.counter + action.payload
+    };
+  }
 
-export default reducer;
+  if (action.type === SHELL_DECREMENT) {
+    // 减
+    return {
+      ...state,
+      counter: state.counter - action.payload
+    };
+  }
+
+  return state;
+};

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Header from '@components/Header';
+import Navigator from '@components/Navigator';
 import Footer from '@components/Footer';
 import { increment, decrement } from '@actions/shell';
 
@@ -9,21 +9,21 @@ class ShellPage extends Component {
     const { counter, dispatch } = this.props;
     return (
       <Fragment>
-        <Header title="壳页" />
+        <Navigator title="壳页" />
         <div id="main">
           <p>示例</p>
           <p>当前counter：{counter}</p>
           <button onClick={() => dispatch(increment(1))}>increment</button>
           <button onClick={() => dispatch(decrement(1))}>decrement</button>
         </div>
-        <Footer acitve="shell" />
+        <Footer />
       </Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ shellState }) => ({
-  counter: shellState.counter
+const mapStateToProps = ({ shell }) => ({
+  counter: shell.counter
 });
 
 export default connect(mapStateToProps)(ShellPage);

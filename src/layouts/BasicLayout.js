@@ -1,12 +1,13 @@
 /**
- * @file 基础布局
+ * @file 基础布局组件
  * @author mengchen <sisimengchen@gmail.com>
  */
 import React, { Component, Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from '@pages/Home';
-import Login from '@pages/User/Login';
+import Stores from '@pages/Stores';
+import Account from '@pages/Account';
+import Menu from '@pages/Menu';
 import Shell from '@pages/Shell';
 import UserIndex from '@pages/User';
 import Exception404 from '@pages/Exception/404';
@@ -16,8 +17,9 @@ class BasicLayout extends Component {
     return (
       <Fragment>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/stores" component={Stores} />
+          <Route exact path="/account" component={Account} />
+          <Route exact path="/menu" component={Menu} />
           <Route exact path="/shell" component={Shell} />
           <Route path="/user/:userId" component={UserIndex} />
           <Route component={Exception404} />

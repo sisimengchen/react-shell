@@ -33,8 +33,33 @@
         padding: 6px 4px;
         text-align: center;
         // font-size: 1.2rem;
+        .icons {
+          display: block;
+          height: 28px;
+          margin-bottom: 3px;
+          pointer-events: none;
+          position: relative;
+          width: 100%;
+          img {
+            display: inline-block;
+            &.active {
+              display: none;
+            }
+          }
+        }
         &.active {
           color: #00a862;
+          .icons {
+            img {
+              display: none;
+              &.active {
+                display: inline-block;
+              }
+            }
+          }
+        }
+        .text {
+          font-size: 12px;
         }
       }
     }

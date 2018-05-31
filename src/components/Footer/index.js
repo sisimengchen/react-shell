@@ -3,60 +3,69 @@
  * @author mengchen <sisimengchen@gmail.com>
  */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import './index.scss';
 
+// 页底公共导航配置
 const navItems = [
   {
     id: 'home',
     text: '首页',
-    link: '/'
+    link: '/',
+    icon: require('../../assets/icons/icon-home.svg'),
+    icon_active: require('../../assets/icons/icon-home-active.svg'),
+    exact: true
   },
   {
-    id: 'shell',
-    text: '壳页',
-    link: '/shell'
+    id: 'stores',
+    text: '门店',
+    link: '/stores',
+    icon: require('../../assets/icons/icon-stores.svg'),
+    icon_active: require('../../assets/icons/icon-stores-active.svg')
   },
   {
-    id: 'user',
+    id: 'account',
     text: '我的账户',
-    link: '/user/123'
+    link: '/account',
+    icon: require('../../assets/icons/icon-account.svg'),
+    icon_active: require('../../assets/icons/icon-account-active.svg')
   },
   {
     id: 'menu',
     text: '菜单',
-    link: '/menu'
+    link: '/menu',
+    icon: require('../../assets/icons/icon-menu.svg'),
+    icon_active: require('../../assets/icons/icon-menu-active.svg')
   },
   {
     id: 'more',
     text: '更多',
-    link: '/more'
+    link: '/more',
+    icon: require('../../assets/icons/icon-more.svg'),
+    icon_active: require('../../assets/icons/icon-more-active.svg')
   }
 ];
 
-class Footer extends Component {
-  render() {
-    let { footer, acitve } = this.props;
-    return (
-      <footer id="footer">
-        <ul className="g-links">
-          {navItems.map((item, index) => (
-            <li key={index}>
-              <Link
-                className={acitve === item.id ? 'active' : undefined}
-                target={item.blankTarget ? '_blank' : '_self'}
-                to={item.link}
-              >
-                {item.text}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </footer>
-    );
-  }
-}
-
-export default Footer;
+export default () => (
+  <footer id="footer">
+    <ul className="g-links">
+      {navItems.map((item, index) => (
+        <li key={item.id}>
+          <NavLink
+            activeClassName="active"
+            exact={item.exact}
+            target={item.blankTarget ? '_blank' : '_self'}
+            to={item.link}
+          >
+            <span className="icons">
+              <img src={item.icon} />
+              <img src={item.icon_active} className="active" />
+            </span>
+            <div className="text">{item.text}</div>
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+  </footer>
+);

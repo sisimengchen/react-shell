@@ -242,7 +242,7 @@ const getPlugin = () => {
 function getConfig() {
   const config = {
     context: resolve(),
-    entry: resolve('src/app.js'),
+    entry: resolve('src/index.js'),
     output: {
       filename: 'index.js',
       path: target === 'githubpages' ? resolve('docs') : resolve('dist'),
@@ -252,13 +252,15 @@ function getConfig() {
       extensions: ['.js'],
       alias: {
         '@utils': resolve('src/utils/index.js'),
+        '@constants': resolve('src/constants/index.js'),
         '@components': resolve('src/components/'),
         '@layouts': resolve('src/layouts/'),
         '@pages': resolve('src/pages/'),
-        '@store': resolve('src/redux/store'),
+        '@store': resolve('src/redux/store/index.js'),
+        '@reducers': resolve('src/redux/reducers/index.js'),
         '@actions': resolve('src/redux/actions'),
         '@history': resolve('src/history.js'),
-        '@services': resolve('src/services/')
+        '@agent': resolve('src/agent.js')
       }
     },
     module: {

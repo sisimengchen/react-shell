@@ -4,16 +4,13 @@
  * @module components/Authorized/Authorized
  */
 import React, { Component } from 'react';
-import ContentLoader, { Facebook } from 'react-content-loader';
+
 class Authorized extends Component {
   render() {
     const { children, authority, noMatch = null } = this.props;
     const childrenRender = typeof children === 'undefined' ? null : children;
-    const { isFetched, isLogin } = authority;
-    if (isFetched) {
-      // 用户信息请求状态
-      return <Facebook />;
-    } else if (isLogin) {
+    const { token } = authority;
+    if (token) {
       // 授权成功过状态
       return childrenRender;
     } else {

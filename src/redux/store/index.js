@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
+import rootReducer from '@reducers';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers';
+import { promiseMiddleware } from '../middleware';
 
-const middleware = [thunk, createLogger()];
+const middleware = [promiseMiddleware, createLogger()];
 
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 

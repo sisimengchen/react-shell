@@ -29,4 +29,26 @@ module.exports = function(app) {
       now: +new Date()
     }));
   });
+
+  app.post('/api/login', (req, res) => {
+    res.json(Mock.mock({
+      code: 200,
+      message: '',
+      data: {
+        token: +new Date()
+      },
+      version: '1.0.0',
+      now: +new Date()
+    }));
+  });
+
+  app.post('/api/logout', (req, res) => {
+    res.json(Mock.mock({
+      code: 200,
+      message: '',
+      data: {},
+      version: '1.0.0',
+      now: +new Date()
+    }));
+  });
 };

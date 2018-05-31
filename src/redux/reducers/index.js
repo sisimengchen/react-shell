@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import shellReducer from './shell';
-import userReducer from './user';
-import pageReducer from './page';
+import common from './common';
+import ui from './ui';
+import auth from './auth';
+import shell from './shell';
 
 export default combineReducers({
-  shellState: shellReducer,
-  userState: userReducer,
-  pageState: pageReducer
+  common,
+  ui,
+  auth,
+  shell
 });

@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import Header from '@components/Header';
+import DocumentTitle from 'react-document-title';
+import Navigator from '@components/Navigator';
 import Footer from '@components/Footer';
-import Loading from '@components/Loading';
+import Waiting from '@components/Waiting';
 import ContentLoader, { Facebook } from 'react-content-loader';
 import { request } from '@utils';
 
@@ -9,7 +10,7 @@ class HomePage extends Component {
   constructor() {
     super();
     this.state = {
-      isFetching: true,
+      loading: true,
       list: []
     };
   }
@@ -17,20 +18,20 @@ class HomePage extends Component {
   componentDidMount() {
     request('/api/home').then((data) => {
       this.setState({
-        isFetching: false,
+        loading: false,
         list: data.list
       });
     });
   }
 
   render() {
-    const { isFetching, list } = this.state;
+    const { loading, list } = this.state;
     return (
       <Fragment>
-        <Loading active={isFetching} />
-        <Header title="首页" isBackable={false} />
+        <DocumentTitle title="首页" />
+        <Navigator title="首页" isBackable={false} />
         <ul id="main">
-          {isFetching ? (
+          {loading ? (
             <Facebook />
           ) : (
             list.map((item, index) => (
@@ -41,7 +42,7 @@ class HomePage extends Component {
             ))
           )}
         </ul>
-        <Footer acitve="home" />
+        <Footer />
       </Fragment>
     );
   }

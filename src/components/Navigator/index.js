@@ -2,66 +2,67 @@
  * @file 导航组件
  * @author mengchen <sisimengchen@gmail.com>
  */
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import { setNavigatorShow } from '@actions/page';
+import history from '@history';
 
 import './index.scss';
 
-const navItems = [
-  { text: '首页', link: '/' },
-  { text: '壳页', link: '/shell' },
-  { text: '我的主页', link: '/user/123' }
-];
-
-const renderItems = () => navItems.map((item, index) => (
-    <Link key={index} to={item.link}>
-      <div className="warpper">{item.text}</div>
-    </Link>
-));
-
-class Navigator extends Component {
-  handleClick() {
-    const { dispatch } = this.props;
-    dispatch(setNavigatorShow(false));
-  }
-
+class Navigator extends PureComponent {
   render() {
-    const { isLogin, navigator } = this.props;
+    const { title, isBackable, isShowLogo } = this.props;
     return (
-      <Fragment>
-        <CSSTransition in={navigator.isShow} timeout={300} classNames="pop">
-          <nav
-            id="navigator"
-            className={navigator.isShow ? 'pop-enter-done' : 'pop-exit-done'}
-            onClick={e => this.handleClick(e)}
-          >
-            {renderItems()}
-            {isLogin && (
-              <a>
-                <div className="warpper">退出账号</div>
-              </a>
-            )}
-          </nav>
-        </CSSTransition>
-        <CSSTransition in={navigator.isShow} timeout={300} classNames="fade">
-          <div
-            id="mask"
-            className={navigator.isShow ? 'fade-enter-done' : 'fade-exit-done'}
-            onClick={e => this.handleClick(e)}
-          />
-        </CSSTransition>
-      </Fragment>
+      <nav id="navigator">
+        <div className="container">
+          <header className="header">
+            <a className="logo" href="/">
+              <img alt="星巴克" src={require('../../assets/icons/logo.svg')} />
+            </a>
+            <div className="primary">
+              <ul />
+            </div>
+          </header>
+          <div className="body">
+            <nav className="secondary">
+              {isBackable ? (
+                <a
+                  className="back"
+                  onClick={() => {
+                    history.goBack();
+                  }}
+                >
+                  <img src={require('../../assets/icons/icon-chevron-left.svg')} />
+                </a>
+              ) : (
+                undefined
+              )}
+              {isShowLogo ? (
+                <a className="logo" href="/">
+                  <img alt="星巴克" src={require('../../assets/icons/logo.svg')} />
+                </a>
+              ) : (
+                undefined
+              )}
+              <div className="display-1">
+                <span>{title}</span>
+              </div>
+              <div className="tabs-wrapper">
+                <ul className="subcategories" />
+              </div>
+            </nav>
+          </div>
+        </div>
+      </nav>
     );
   }
 }
 
-const stateToProps = ({ userState, pageState }) => ({
-  isLogin: userState.isLogin,
-  userInfo: userState.userInfo,
-  navigator: pageState.navigator
-});
+Navigator.defaultProps = {
+  title: '',
+  isBackable: true,
+  isShowLogo: false
+};
 
-export default connect(stateToProps)(Navigator);
+export default Navigator;

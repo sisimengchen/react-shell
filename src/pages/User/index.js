@@ -1,27 +1,27 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Header from '@components/Header';
+import Navigator from '@components/Navigator';
 import Footer from '@components/Footer';
 
 class UserIndex extends Component {
   render() {
-    const { match, userInfo } = this.props;
+    const { match, currentUser } = this.props;
     const { userId } = match.params;
     return (
       <Fragment>
-        <Header title="我的主页" />
+        <Navigator title="我的主页" />
         <div>
           <p>当前路由的用户id:{userId}</p>
-          <p>当前登录的用户id:{userInfo.id}</p>
+          <p>当前登录的用户id:{currentUser.id}</p>
         </div>
-        <Footer acitve="user" />
+        <Footer />
       </Fragment>
     );
   }
 }
 
-const stateToProps = ({ userState }) => ({
-  userInfo: userState.userInfo
+const mapStateToProps = ({ common }) => ({
+  currentUser: common.currentUser
 });
 
-export default connect(stateToProps)(UserIndex);
+export default connect(mapStateToProps)(UserIndex);

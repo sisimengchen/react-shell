@@ -6,22 +6,22 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import history from '@history';
 import Navigator from '@components/Navigator';
-import { toggleNavigatorShow } from '@actions/page';
+// import { toggleNavigatorShow } from '@actions/page';
 
 import './index.scss';
 
 class Header extends Component {
   handleUserClick() {
-    const { isLogin, dispatch } = this.props;
-    if (isLogin) {
-      dispatch(toggleNavigatorShow());
+    const { token, dispatch } = this.props;
+    if (token) {
+      // dispatch(toggleNavigatorShow());
     } else {
       console.log('未登录去登录页');
     }
   }
 
   render() {
-    const { title, isBackable, isLogin, userInfo } = this.props;
+    const { title, isBackable, token, currentUser } = this.props;
     return (
       <Fragment>
         <header id="header">
@@ -39,10 +39,10 @@ class Header extends Component {
           )}
           <h1 className="g-title">{title}</h1>
           <span className="g-user" onClick={e => this.handleUserClick(e)}>
-            {isLogin ? userInfo.name : '登录'}
+            {/* {token ? user.name : '登录'} */}
           </span>
         </header>
-        <Navigator />
+        {/* <Navigator /> */}
       </Fragment>
     );
   }
@@ -53,9 +53,9 @@ Header.defaultProps = {
   isBackable: true
 };
 
-const stateToProps = ({ userState }) => ({
-  userInfo: userState.userInfo,
-  isLogin: userState.isLogin
+const mapStateToProps = ({ common }) => ({
+  currentUser: common.currentUser,
+  token: common.token
 });
 
-export default connect(stateToProps)(Header);
+export default connect(mapStateToProps)(Header);
