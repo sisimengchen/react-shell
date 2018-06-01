@@ -14,10 +14,18 @@ class AuthorizedRoute extends Component {
     const authority = {
       token
     };
+    const { location } = this.props;
     return (
       <Authorized
         authority={authority}
-        noMatch={<Route {...rest} render={() => <Redirect to={{ pathname: redirectPath }} />} />}
+        noMatch={
+          <Route
+            {...rest}
+            render={() => (
+              <Redirect to={{ pathname: redirectPath, search: `?target=${encodeURIComponent(location.pathname)}` }} />
+            )}
+          />
+        }
       >
         <Route {...rest} render={props => (Component ? <Component {...props} /> : render(props))} />
       </Authorized>

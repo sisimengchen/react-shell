@@ -1,10 +1,19 @@
 import { LOGIN, REGISTER, LOGOUT, ASYNC_START, ASYNC_END } from '@constants';
 
 const defaultState = {
-  processing: false
+  processing: false,
+  errors: null
 };
 
 export default (state = defaultState, action) => {
+  if (action.type === LOGIN || action.type === REGISTER) {
+    // 登录注册
+    return {
+      ...state,
+      errors: action.error ? action.payload.errors : null
+    };
+  }
+
   if (action.type === ASYNC_START) {
     // 异步开始 获取当前用户
     return {

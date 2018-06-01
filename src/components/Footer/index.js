@@ -55,7 +55,7 @@ export default () => (
       {navItems.map((item, index) => (
         <li key={item.id}>
           {typeof item.link === 'function' ? (
-            <a href="javascript:void(0)" onClick={() => store.dispatch({ type: 'UI_OVERLAY', payload: true })}>
+            <a href="javascript:void(0)" onClick={() => item.link()}>
               <span className="icons">
                 <img src={item.icon} />
                 <img src={item.icon_active} className="active" />
@@ -63,12 +63,7 @@ export default () => (
               <div className="text">{item.text}</div>
             </a>
           ) : (
-            <NavLink
-              activeClassName="active"
-              exact={item.exact}
-              target={item.blankTarget ? '_blank' : '_self'}
-              to={item.link}
-            >
+            <NavLink activeClassName="active" exact={item.exact} to={item.link}>
               <span className="icons">
                 <img src={item.icon} />
                 <img src={item.icon_active} className="active" />
