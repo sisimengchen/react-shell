@@ -22,7 +22,7 @@ export default (state = defaultState, action) => {
     return {
       ...state,
       token: action.payload.token,
-      currentUser: null
+      currentUser: action.payload
     };
   }
 

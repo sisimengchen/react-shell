@@ -9,7 +9,6 @@ class LoginPage extends Component {
   login() {
     const { dispatch } = this.props;
     dispatch({ type: 'LOGIN', payload: Auth.login() });
-    dispatch({ type: 'APP_LOAD', payload: Auth.current() });
   }
 
   logout() {

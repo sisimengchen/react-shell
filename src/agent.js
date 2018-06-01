@@ -12,7 +12,23 @@ export const getToken = () => token;
 
 export const Auth = {
   current: () => request('/api/user'),
-  login: (email, password) => request('/api/login', { method: 'POST', body: { email, password } }),
-  register: (username, email, password) => request('/api/register', { method: 'POST', body: { username, email, password } }),
+  login: (email, password) => request('/api/login', { method: 'POST', body: { email, password } })
+    .then((json) => {
+      setToken(json.token);
+      return Auth.current();
+    })
+    .then((json) => {
+      json.token = token;
+      return json;
+    }),
+  register: (username, email, password) => request('/api/register', { method: 'POST', body: { username, email, password } })
+    .then((json) => {
+      setToken(json.token);
+      return Auth.current();
+    })
+    .then((json) => {
+      json.token = token;
+      return json;
+    }),
   logout: () => request('/api/logout', { method: 'POST' })
 };
