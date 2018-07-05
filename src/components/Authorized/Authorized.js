@@ -11,10 +11,10 @@ class Authorized extends Component {
     const childrenRender = typeof children === 'undefined' ? null : children;
     const { token } = authority;
     if (token) {
-      // 授权成功过状态
+      // 授权通过 渲染Router
       return childrenRender;
     } else {
-      // 授权失败状态
+      // 未通过授权 渲染noMatch
       return noMatch;
     }
   }

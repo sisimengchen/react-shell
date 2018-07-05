@@ -21,7 +21,7 @@ class App extends Component {
 
   render() {
     const { appLoaded, active } = this.props;
-    if (appLoaded) {
+    if (appLoaded) { // app启动完成渲染路由
       return (
         <Fragment>
           <Loading active={active} />
@@ -30,12 +30,13 @@ class App extends Component {
               {/* 需要授权的页面通过AuthorizedRoute包装，未通过授权则直接取登录页 */}
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Login} />
               <AuthorizedRoute path="/" render={props => <BasicLayout {...props} />} redirectPath="/login" />
             </Switch>
           </Router>
         </Fragment>
       );
-    } else {
+    } else { // app启动中渲染加载动画
       return (
         <Fragment>
           <Loading active={true} />

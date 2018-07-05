@@ -4,6 +4,7 @@ import Navigator from '@components/Navigator';
 import Footer from '@components/Footer';
 import Waiting from '@components/Waiting';
 import ContentLoader, { Facebook } from 'react-content-loader';
+import List from '@components/List';
 import { request } from '@utils';
 
 class HomePage extends Component {
@@ -30,6 +31,7 @@ class HomePage extends Component {
       <Fragment>
         <DocumentTitle title="首页" />
         <Navigator title="首页" isBackable={false} />
+        <List />
         <ul id="main">
           {loading ? (
             <Facebook />
