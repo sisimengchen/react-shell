@@ -1,12 +1,13 @@
-import './index.scss';
+/* eslint-disable no-unused-vars */
+// import '@babel/polyfill';
+import './assets/styles/index.scss';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import store from '@store';
+import store from 'redux/store';
+import App from './app.jsx';
 
-import App from '@components/App';
-
-ReactDOM.render(
+render(
   <Provider store={store}>
     <App />
   </Provider>,

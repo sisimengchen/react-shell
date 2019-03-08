@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const webpackConfig = require('./config');
 
 const compiler = webpack(webpackConfig);
-// console.log(webpackConfig);
+
 compiler.run((err, stats) => {
   // console.log(2);
   if (err) {

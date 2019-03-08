@@ -1,30 +1,31 @@
-.waiting:before,
-.waiting span,
-.waiting:after {
-  animation: waiting 0.3s infinite alternate;
-  background: #00a862;
-  border-radius: 50%;
-  content: "";
-  float: left;
-  height: 8px;
-  margin: 0 3px;
-  vertical-align: middle;
-  width: 8px;
-}
-.waiting span {
-  animation-delay: 0.1s;
-}
-.waiting:after {
-  animation-delay: 0.2s;
-}
-
-@keyframes waiting {
-  0% {
-    opacity: 1;
-    transform: scale(1.5);
+.components-waiting {
+  &:before,
+  &:after,
+  span {
+    animation: waiting 0.3s infinite alternate;
+    background: #00a862;
+    border-radius: 50%;
+    content: "";
+    float: left;
+    height: 8px;
+    margin: 0 3px;
+    vertical-align: middle;
+    width: 8px;
   }
-  100% {
-    opacity: 0.4;
-    transform: scale(1);
+  span {
+    animation-delay: 0.1s;
+  }
+  &:after {
+    animation-delay: 0.2s;
+  }
+  @keyframes waiting {
+    0% {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
   }
 }

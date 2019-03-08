@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux';
-import common from './common';
-import ui from './ui';
-import auth from './auth';
-import shell from './shell';
+import global from './global';
+import currentUser from './currentUser';
 
 export default combineReducers({
-  common,
-  ui,
-  auth,
-  shell
+  global,
+  currentUser
 });
