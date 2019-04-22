@@ -13,6 +13,7 @@ const CoreRouter = () => (
   <Router history={history}>
     <Switch>
       {routes.map((route = {}, index) => {
+        console.log(route);
         return <AuthorizedRoute key={index} exact {...route} />;
       })}
     </Switch>

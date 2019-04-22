@@ -2,7 +2,7 @@ window.desginWidth = 750;
 window.refresh = 1;
 !(function(e, t, n) {
   function r() {
-    var e = s.getBoundingClientRect().width;
+    let e = s.getBoundingClientRect().width;
     e > 640 && (e = 640);
     const t = (100 * e) / desginWidth;
     (s.style.fontSize = `${t}px`), (a.rem = t);
@@ -15,7 +15,7 @@ window.refresh = 1;
   function i() {
     clearTimeout(o), (o = setTimeout(r, 100));
   }
-  var o;
+  let o;
   var a = {};
   var s = e.document.documentElement;
   n &&
@@ -37,11 +37,11 @@ window.refresh = 1;
   r(),
   (a.refreshRem = r),
   (a.rem2px = function(e) {
-    var t = parseFloat(e) * this.rem;
+    let t = parseFloat(e) * this.rem;
     return 'string' === typeof e && e.match(/rem$/) && (t += 'px'), t;
   }),
   (a.px2rem = function(e) {
-    var t = parseFloat(e) / this.rem;
+    let t = parseFloat(e) / this.rem;
     return 'string' === typeof e && e.match(/px$/) && (t += 'rem'), t;
   }),
   (e.remCalc = a);

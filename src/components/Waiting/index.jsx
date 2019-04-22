@@ -6,9 +6,9 @@ import React from 'react';
 import './index.scss';
 
 const Waiting = () => (
-    <div className="components-waiting">
-      <span />
-    </div>
+  <div className="components-waiting">
+    <span />
+  </div>
 );
 
 export default Waiting;

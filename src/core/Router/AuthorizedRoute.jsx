@@ -7,48 +7,74 @@
 import React, { Fragment } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
-import { connect } from 'react-redux';
 import queryString from 'query-string';
+import { User, UserLoadableComponent } from 'utils/user';
 
 const AuthorizedRoute = ({
   layout: Layout = Fragment,
   component: Component,
   authority = [],
   title,
-  currentUser,
   location = {},
   ...rest
 }) => {
-  currentUser.authority = currentUser.authority || [];
   location.query = location.search ? queryString.parse(location.search) : {};
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (authority.length === 0 || currentUser.authority.indexOf(authority[0]) > -1) {
+        const { location = {} } = props;
+        const { pathname = '/' } = location;
+        // /sign/ 下的所有页面需要做登录判断， 其他的不用
+        const isSignPage = pathname.indexOf('/sign/') === 0;
+        if (!isSignPage) {
           return (
-            <Layout>
+            <Fragment>
               {title && <DocumentTitle title={title} />}
-              <Component {...props} />
-            </Layout>
-          );
-        } else {
-          return (
-            <Redirect
-              to={{
-                pathname: '/login',
-                search: `?target=${encodeURIComponent(location.href)}`
-              }}
-            />
+              <Layout title={title}>
+                <Component {...props} />
+              </Layout>
+            </Fragment>
           );
         }
+        return (
+          <Fragment>
+            {title && <DocumentTitle title={title} />}
+            <UserLoadableComponent
+              render={(data) => {
+                if (!User.isLogin) {
+                  // 判断登录
+                  return (
+                    <Redirect
+                      to={{
+                        pathname: '/signin',
+                        search: `?continue=${encodeURIComponent(window.location.href)}`
+                      }}
+                    />
+                  );
+                } else if (!User.isAuthority(authority)) {
+                  // 判断权限
+                  return (
+                    <Redirect
+                      to={{
+                        pathname: '/forbidden',
+                        search: `?continue=${encodeURIComponent(window.location.href)}`
+                      }}
+                    />
+                  );
+                }
+                return (
+                  <Layout title={title}>
+                    <Component {...props} />
+                  </Layout>
+                );
+              }}
+            />
+          </Fragment>
+        );
       }}
     />
   );
 };
 
-const mapStateToProps = ({ currentUser }) => ({
-  currentUser: currentUser
-});
-
-export default connect(mapStateToProps)(AuthorizedRoute);
+export default AuthorizedRoute;

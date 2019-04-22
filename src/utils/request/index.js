@@ -1,6 +1,27 @@
 import axios from 'axios';
-// import history from './history';
-// import { setToken } from 'utils/setToken';
+import store from 'redux/store';
+
+export const Loading = {
+  cacheList: [],
+  isLoading: false,
+  start: function(cache) {
+    if (this.cacheList.length === 0 && this.closeFun == null && this.isLoading === false) {
+      this.isLoading = true;
+      store.dispatch({ type: 'UI_LOADDING', payload: true });
+    }
+    this.cacheList.push(cache);
+  },
+  end: function(cache) {
+    const index = this.cacheList.indexOf(cache);
+    if (index > -1) {
+      this.cacheList.splice(index, 1);
+    }
+    if (this.cacheList.length === 0 && this.isLoading === true) {
+      this.isLoading = false;
+      store.dispatch({ type: 'UI_LOADDING', payload: false });
+    }
+  }
+};
 
 export function getBaseUrl() {
   // 开发环境
@@ -29,7 +50,7 @@ const defaultOption = {
   unkonwErrorRetry: 2
 };
 
-const requestfactory = function (url, axiosOptions = {}, options = {}) {
+const requestfactory = function(url, axiosOptions = {}, options = {}) {
   options = {
     ...defaultOption,
     ...options
@@ -40,7 +61,7 @@ const requestfactory = function (url, axiosOptions = {}, options = {}) {
   }
   options.key && (requestLocker[`${options.key}`] = true);
   const cache = +new Date();
-  // options.loading && Loading.start(cache);
+  options.loading && Loading.start(cache);
   const newAxiosOptions = { ...axiosOptions, ...{ url } };
   newAxiosOptions.params = {
     ...newAxiosOptions.params,
@@ -49,7 +70,7 @@ const requestfactory = function (url, axiosOptions = {}, options = {}) {
   return instance
     .request(newAxiosOptions)
     .then((response = {}) => {
-      // options.loading && Loading.end(cache)
+      options.loading && Loading.end(cache);
       options.key && (requestLocker[`${options.key}`] = false);
       const { data = {} } = response;
       if (data.code == 200) {
@@ -83,11 +104,11 @@ const requestfactory = function (url, axiosOptions = {}, options = {}) {
       if (message.indexOf('timeout') > -1) {
         error.isTimeout = true;
       }
-      // options.loading && Loading.end(cache)
+      options.loading && Loading.end(cache);
       options.key && (requestLocker[`${options.key}`] = false);
       throw error;
     });
-}
+};
 
 export const request = {
   get: function({ url, data = {}, options = {}, axiosOptions = {} }) {

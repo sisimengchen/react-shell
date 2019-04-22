@@ -1,4 +1,4 @@
-import { setToken } from 'core/utils/token';
+import { setToken } from 'utils/token';
 import { User } from 'utils/user';
 import { request } from 'utils/request';
 

@@ -1,9 +1,13 @@
+/* eslint-disable no-unused-vars */
 import { request } from 'utils/request';
+import React from 'react';
+import Loadable from 'react-loadable';
+import { Instagram } from 'react-content-loader';
 
 export const User = {
   userData: undefined,
   promise: undefined,
-  hasLogin: false, // 只能证明用户在某段时间登陆成功过
+  isLogin: !!window.__isLogin, // 只能证明用户在某段时间登陆成功过
   url: '/api/user',
   get: function(force = false, options = {}) {
     if (!force && this.promise) {
@@ -33,37 +37,44 @@ export const User = {
   },
   onSuccess: function(data) {
     this.userData = this._formate(data);
-    this.hasLogin = true;
+    this.isLogin = true;
+    window.__isLogin = true;
     return data;
   },
   _formate: function(data) {
+    const { authority = [] } = data;
+    this.authorityMap = {};
+    authority.forEach((author) => {
+      this.authorityMap[`${author}`] = true;
+    });
     return data;
   },
   reset: function() {
     this.userData = undefined;
-    this.hasLogin = false;
+    this.isLogin = false;
+    window.__isLogin = false;
   },
-  isAuthority: function(denyAuthors = [], allowAuthors = [], strict = true) {
-    if (!this.rolesMap) {
+  isAuthority: function(authority = [], strict = true) {
+    if (!this.authorityMap) {
       return !strict;
     }
-    const { rolesMap = {} } = this;
-    const denyLength = denyAuthors.length;
-    if (denyLength) {
-      for (let i = 0; i < denyLength; i++) {
-        // 只要有一个属于则拒绝
-        if (rolesMap[`${denyAuthors[i]}`]) {
+    const { authorityMap = {} } = this;
+    const allowAuthors = [];
+    for (let i = authority.length - 1; i >= 0; i--) {
+      let auth = `${authority[i]}`;
+      if (auth.startsWith('!')) {
+        auth = auth.slice(1);
+        if (authorityMap[`${auth}`]) {
           return false;
         }
+      } else {
+        allowAuthors.push(auth);
       }
     }
-    const allowLength = allowAuthors.length;
-    if (allowLength) {
-      for (let j = 0; j < allowLength; j++) {
-        // 只要有一个属于则同意
-        if (rolesMap[`${allowAuthors[j]}`]) {
-          return true;
-        }
+    for (let j = allowAuthors.length - 1; j >= 0; j--) {
+      const auth = `${allowAuthors[j]}`;
+      if (authorityMap[auth]) {
+        return true;
       }
     }
     return !strict;
@@ -72,3 +83,17 @@ export const User = {
     window.location.href = '/logout';
   }
 };
+
+export const UserLoadableComponent = Loadable({
+  loader: () => User.get(),
+  loading: (props) => {
+    if (props.error) {
+      return <div>{props.error.toString()}</div>;
+    } else if (props.pastDelay) {
+      return <Instagram />;
+    } else {
+      return null;
+    }
+  },
+  render: (data, props) => props.render(data)
+});

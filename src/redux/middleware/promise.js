@@ -10,13 +10,13 @@ export const promiseMiddleware = store => next => (action) => {
     store.dispatch({ type: 'ASYNC_START', subtype: action.type });
     action.payload
       .then((res) => {
-        console.log('RESULT', res);
+        // console.log('RESULT', res);
         action.payload = res;
         store.dispatch({ type: 'ASYNC_END', subtype: action.type });
         store.dispatch(action);
       })
       .catch((error) => {
-        console.log('ERROR', error);
+        // console.log('ERROR', error);
         action.error = true;
         action.payload = error;
         store.dispatch({ type: 'ASYNC_END', subtype: action.type, error: true });

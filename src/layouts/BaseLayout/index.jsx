@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 import './index.scss';
 
 export default class BaseLayout extends Component {
@@ -8,11 +10,11 @@ export default class BaseLayout extends Component {
   }
 
   render() {
-    const { children } = this.props;
     return (
       <div id="layouts-baselayout">
-        <h1>BaseLayout</h1>
-        <div>{children}</div>
+        <Header title={this.props.title} />
+        <div className="layouts-container">{this.props.children}</div>
+        <Footer />
       </div>
     );
   }

@@ -3,12 +3,17 @@
  * @author mengchen <sisimengchen@gmail.com>
  */
 import React from 'react';
+import { connect } from 'react-redux';
 import './index.scss';
 
-const Loading = ({ active = false }) => (
+const Loading = ({ loadding = false }) => (
   <div id="components-loading">
-    <div className={`loading${active ? ' active' : ''}`} />
+    <div className={`loading${loadding ? ' active' : ''}`} />
   </div>
 );
 
-export default Loading;
+const mapStateToProps = ({ ui }) => ({
+  loadding: ui.loadding
+});
+
+export default connect(mapStateToProps)(Loading);

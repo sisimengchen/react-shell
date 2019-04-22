@@ -33,7 +33,10 @@ const getLessLoaders = () => {
     loader: 'less-loader',
     options: {
       sourceMap: !isEnvProduction,
-      javascriptEnabled: true
+      javascriptEnabled: true,
+      paths: [
+        path.resolve(__dirname, '../', 'node_modules')
+      ]
     }
   });
   return loaders;

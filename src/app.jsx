@@ -1,35 +1,36 @@
-import React, { Component, Fragment } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { User } from 'utils/user';
-import Loading from 'components/Loading';
 import CoreRouter from 'core/Router';
-import CoreBoot from 'core/Boot';
+import Loading from 'components/Loading';
+import Launch from 'components/Launch';
+/**
+ * 应用程序Component.
+ */
+class App extends PureComponent {
+  static defaultProps = {
+    appInitComplete: false
+  };
 
-const mapStateToProps = ({ global, currentUser }) => ({
-  global: global,
-  currentUser: currentUser
-});
-
-@connect(mapStateToProps)
-export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({ type: 'APP_LOAD', payload: User.get() });
-  }
-
   render() {
-    const { global } = this.props;
+    const { appInitComplete } = this.props;
     return (
       <Fragment>
-        <Loading active={global.loadding} />
-        <CoreRouter />
-        {/* <CoreBoot /> */}
+        <Loading />
+        <Launch appInitComplete={appInitComplete} />
+        {appInitComplete ? <CoreRouter /> : null}
       </Fragment>
     );
   }
 }
+
+const mapStateToProps = ({ global }) => ({
+  appInitComplete: global.appInitComplete
+});
+
+export default connect(mapStateToProps)(App);

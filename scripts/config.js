@@ -160,7 +160,7 @@ const getPlugin = () => {
     new HtmlWebpackPlugin({
       filename: path.join(destPath, 'index.html'),
       template: resolve('src/template/index.html'),
-      analytics: `<script>${fs.readFileSync(resolve('src/template/analytics.js'))}</script>`,
+      gtag: 'UA-135935262-1',
       zoom: `<script>${fs.readFileSync(resolve('src/template/zoom.js'))}</script>`,
       loading: {
         html: fs.readFileSync(resolve('src/template/loading/index.html')),
@@ -189,10 +189,10 @@ const getPlugin = () => {
       .concat([
         new webpack.ProgressPlugin(),
         isAnalyzerEnable &&
-        new BundleAnalyzerPlugin({
-          analyzerMode: 'static',
-          reportFilename: path.join(destPath, 'report/index.html')
-        }),
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            reportFilename: path.join(destPath, 'report/index.html')
+          }),
         new MiniCssExtractPlugin({
           filename: 'static/css/[name].[contenthash:8].css',
           chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
@@ -207,11 +207,13 @@ const getPlugin = () => {
           automaticNameDelimiter: '~',
           name: true,
           cacheGroups: {
-            react: { // 所有react开头的单独打一个包
+            react: {
+              // 所有react开头的单独打一个包
               test: /[\\/]node_modules[\\/]react/,
               priority: -20
             },
-            vendors: { // 所有node_modules的单独打一个包
+            vendors: {
+              // 所有node_modules的单独打一个包
               test: /[\\/]node_modules[\\/]/,
               priority: -100
             },
