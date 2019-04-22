@@ -160,6 +160,7 @@ const getPlugin = () => {
     new HtmlWebpackPlugin({
       filename: path.join(destPath, 'index.html'),
       template: resolve('src/template/index.html'),
+      favicon: resolve('src/template/favicon.ico'),
       gtag: 'UA-135935262-1',
       zoom: `<script>${fs.readFileSync(resolve('src/template/zoom.js'))}</script>`,
       loading: {

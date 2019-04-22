@@ -6,10 +6,10 @@ import React from 'react';
 import './index.scss';
 
 const Launch = ({ appInitComplete = false }) => (
-  <div id="components-launch" className={!appInitComplete ? 'active' : null}>
+  <div id="components-launch" className={appInitComplete ? 'disabled' : null}>
     <div className="launch">
-     <p>Launch...</p>
-     <img src={require('./assets/react.svg')} />
+      <img src={require('./assets/react.svg')} />
+      <p>Launch...</p>
     </div>
   </div>
 );

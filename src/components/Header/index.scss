@@ -1,5 +1,6 @@
 #components-header {
-  background-color: antiquewhite;
+  background-color: #20232a;
+  color: #fff;
   padding: 12px 12px 0 12px;
   .secondary {
     .back {
@@ -12,6 +13,9 @@
       padding: 3px;
       height: 28px;
       width: 28px;
+      img {
+        background-color: #61dafb;
+      }
     }
     .title {
       display: inline-block;
