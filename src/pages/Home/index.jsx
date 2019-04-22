@@ -13,8 +13,8 @@ export default class HomePage extends Component {
       <div className="pages-home">
         <dl>
           <dd>
-            <NavLink to="/sign/test">test页</NavLink>
-            <NavLink to="/sign/test2">test2页</NavLink>
+            <NavLink to="/sign/test">测试页</NavLink>
+            <NavLink to="/sign/test2">测试页2</NavLink>
           </dd>
         </dl>
         <div>HomePage</div>

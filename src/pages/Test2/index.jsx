@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-export default class HomePage2 extends Component {
+export default class TestPage2 extends Component {
   constructor(props) {
     super(props);
     const { query } = props.location;
