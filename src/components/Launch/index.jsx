@@ -7,7 +7,10 @@ import './index.scss';
 
 const Launch = ({ appInitComplete = false }) => (
   <div id="components-launch" className={!appInitComplete ? 'active' : null}>
-    <div className="launch">Launch...</div>
+    <div className="launch">
+     <p>Launch...</p>
+     <img src={require('./assets/react.svg')} />
+    </div>
   </div>
 );
 
