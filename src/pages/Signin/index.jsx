@@ -61,7 +61,7 @@ const mapStateToProps = ({ data }) => ({
 
 const mapDispatchToProps = dispatch => ({
   signin: (payload = {}) => dispatch({ type: 'SIGNIN', payload: payload })
-  // assignData: (payload = {}) => dispatch({ type: 'ASSIGN_DATA', payload })
+  // updateData: (payload = {}) => dispatch({ type: 'UPDATE_DATA', payload })
 });
 
 export default connect(
