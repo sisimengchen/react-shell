@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { signout } from 'agent';
 import './index.scss';
 
-class TestPage extends Component {
+class TestPage extends PureComponent {
   constructor(props) {
     super(props);
     const { query } = props.location;
@@ -10,6 +11,13 @@ class TestPage extends Component {
       testid: query.testid
     };
   }
+
+  signout = () => {
+    signout().then(() => {
+      this.props.signout();
+      this.props.history.replace(window.location.href.replace(window.location.origin, ''));
+    });
+  };
 
   render() {
     const { testid } = this.state;
@@ -20,6 +28,7 @@ class TestPage extends Component {
           <li>userId:{this.props.userId}</li>
           <li>userName:{this.props.userName}</li>
         </ul>
+        <button onClick={this.signout}>注销</button>
       </div>
     );
   }
@@ -30,4 +39,11 @@ const mapStateToProps = ({ currentUser }) => ({
   userName: currentUser.name
 });
 
-export default connect(mapStateToProps)(TestPage);
+const mapDispatchToProps = dispatch => ({
+  signout: () => dispatch({ type: 'SIGNOUT' })
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TestPage);

@@ -34,7 +34,7 @@ export const routes = [
     path: '/signin',
     title: '登录页',
     layout: BaseLayout,
-    component: Loadable(getComponent(() => import(/* webpackChunkName: "LoginPage" */ 'pages/Login')))
+    component: Loadable(getComponent(() => import(/* webpackChunkName: "SigninPage" */ 'pages/Signin')))
   },
   {
     path: '/forbidden',
@@ -45,6 +45,7 @@ export const routes = [
   {
     path: '*',
     title: '抱歉，您访问的页面不存在！',
+    layout: BaseLayout,
     component: require('core/Error/404').default
   }
 ];

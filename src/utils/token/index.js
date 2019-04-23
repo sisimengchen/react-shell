@@ -10,4 +10,4 @@ export const setToken = (_token) => {
   token ? window.localStorage.setItem('token', token) : window.localStorage.removeItem('token');
 };
 
-export const getToken = () => token;
+export const getToken = () => window.localStorage.getItem('token') || null;

@@ -3,11 +3,11 @@ import { request } from 'utils/request';
 import React from 'react';
 import Loadable from 'react-loadable';
 import { Instagram } from 'react-content-loader';
+import { getToken } from 'utils/token';
 
 export const User = {
   userData: undefined,
   promise: undefined,
-  isLogin: !!window.__isLogin, // 只能证明用户在某段时间登陆成功过
   url: '/api/user',
   get: function(force = false, options = {}) {
     if (!force && this.promise) {
@@ -37,7 +37,6 @@ export const User = {
   },
   onSuccess: function(data) {
     this.userData = this._formate(data);
-    this.isLogin = true;
     window.__isLogin = true;
     return data;
   },
@@ -51,8 +50,11 @@ export const User = {
   },
   reset: function() {
     this.userData = undefined;
-    this.isLogin = false;
     window.__isLogin = false;
+  },
+  isLogin: function() {
+    // 只能证明用户在某段时间登陆成功过
+    return !!window.__isLogin && getToken();
   },
   isAuthority: function(authority = [], strict = true) {
     if (!this.authorityMap) {

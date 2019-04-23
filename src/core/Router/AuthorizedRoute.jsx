@@ -42,7 +42,7 @@ const AuthorizedRoute = ({
             {title && <DocumentTitle title={title} />}
             <UserLoadableComponent
               render={(data) => {
-                if (!User.isLogin) {
+                if (!User.isLogin()) {
                   // 判断登录
                   return (
                     <Redirect
@@ -57,8 +57,7 @@ const AuthorizedRoute = ({
                   return (
                     <Redirect
                       to={{
-                        pathname: '/forbidden',
-                        search: `?continue=${encodeURIComponent(window.location.href)}`
+                        pathname: '/forbidden'
                       }}
                     />
                   );

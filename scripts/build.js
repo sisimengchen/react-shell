@@ -9,7 +9,6 @@ const webpackConfig = require('./config');
 const compiler = webpack(webpackConfig);
 
 compiler.run((err, stats) => {
-  // console.log(2);
   if (err) {
     throw err;
   }

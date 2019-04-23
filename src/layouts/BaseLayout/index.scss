@@ -1,5 +1,6 @@
 #layouts-baselayout {
   .layouts-container {
     min-height: calc(100vh - 57px - 52px);
+    overflow: scroll;
   }
 }
