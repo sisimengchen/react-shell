@@ -4,7 +4,7 @@
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { history } from 'core/utils/history';
+import history from 'core/history';
 import './index.scss';
 
 class Header extends Component {

@@ -5,9 +5,10 @@
  */
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
-import { history } from 'core/utils/history';
+import history from 'core/history';
+import routes from 'core/routes';
+
 import AuthorizedRoute from './AuthorizedRoute';
-import { routes } from 'core/options';
 
 const CoreRouter = () => (
   <Router history={history}>

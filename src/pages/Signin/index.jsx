@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import history from 'core/history';
 import { signin } from 'agent';
 import Waiting from 'components/waiting';
 import './index.scss';
@@ -33,7 +34,7 @@ class SigninPage extends PureComponent {
           },
           () => {
             const { target } = this.state;
-            this.props.history.replace(target.replace(window.location.origin, ''));
+            history.replace(target.replace(window.location.origin, ''));
           }
         );
       })

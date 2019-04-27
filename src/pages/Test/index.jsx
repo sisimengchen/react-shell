@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import history from 'core/history';
 import { signout } from 'agent';
 import './index.scss';
 
@@ -15,7 +16,7 @@ class TestPage extends PureComponent {
   signout = () => {
     signout().then(() => {
       this.props.signout();
-      this.props.history.replace(window.location.href.replace(window.location.origin, ''));
+      history.replace(window.location.href.replace(window.location.origin, ''));
     });
   };
 
