@@ -16,7 +16,12 @@ class TestPage extends PureComponent {
   signout = () => {
     signout().then(() => {
       this.props.signout();
-      history.replace(window.location.href.replace(window.location.origin, ''));
+      const { pathname, search } = this.props.location;
+      const target = `target=${encodeURIComponent(`${pathname}${search}`)}`;
+      history.replace({
+        pathname: '/signin',
+        search: target ? `?${target}` : ''
+      });
     });
   };
 

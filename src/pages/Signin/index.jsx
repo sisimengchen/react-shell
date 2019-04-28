@@ -10,7 +10,7 @@ class SigninPage extends PureComponent {
     super(props);
     const { query } = props.location;
     this.state = {
-      target: query.continue || '/',
+      target: query.target || '/',
       loading: false,
       accountid: 'accountid',
       password: 'password'

@@ -5,13 +5,11 @@
 import createBrowserHistory from 'history/createBrowserHistory';
 import createHashHistory from 'history/createHashHistory';
 
-// const historyMode = process.env.TARGET === 'githubpages' ? 'Hash' : 'Browser';
-
-const historyMode = 'Hash';
+const historyMode = process.env.TARGET === 'githubpages' ? 'hashHistory' : 'browserHistory';
 
 const gtag = 'UA-138570751-1';
 
-const createHistory = historyMode === 'Hash' ? createHashHistory : createBrowserHistory;
+const createHistory = historyMode === 'hashHistory' ? createHashHistory : createBrowserHistory;
 
 const history = createHistory({
   getUserConfirmation: (message, callback) => callback(true),
