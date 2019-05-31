@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-// import '@babel/polyfill';
 import './assets/styles/index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';

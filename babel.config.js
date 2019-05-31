@@ -7,17 +7,23 @@ module.exports = function(api) {
     [
       require('@babel/preset-env'),
       {
-        useBuiltIns: "usage",
+        debug: devMode,
         targets: { browsers: ['Android >= 4.0', 'ios >= 8', 'ie >=9'] }
       }
     ],
-    [require('@babel/preset-react')]
+    [
+      require('@babel/preset-react'),
+      {
+        development: devMode
+      }
+    ]
   ];
   const plugins = [
+    [require('@babel/plugin-transform-runtime'), { corejs: 3 }],
     [require('@babel/plugin-proposal-decorators'), { legacy: true }],
     require('@babel/plugin-proposal-class-properties'),
     require('@babel/plugin-syntax-dynamic-import')
-  ];
+  ].filter(Boolean);
 
   return {
     presets,
