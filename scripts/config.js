@@ -7,7 +7,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const { resolve, getCssLoaders, getLessLoaders, getScssLoaders, getStylusLoaders } = require('./utils');
 const {
@@ -108,9 +109,11 @@ const getRules = () => {
 
 const getOptimization = () => {
   const optimizations = {
-    runtimeChunk: true
+    minimize: false,
+    runtimeChunk: 'single'
   };
   if (isEnvProduction) {
+    optimizations.minimize = true;
     optimizations.minimizer = [
       new TerserPlugin({
         terserOptions: {
@@ -188,6 +191,16 @@ const getPlugin = () => {
   if (isEnvProduction) {
     return plugins
       .concat([
+        new ScriptExtHtmlWebpackPlugin({
+          custom: {
+            test: /\.js$/,
+            attribute: 'crossorigin',
+            value: 'anonymous'
+          },
+          preload: {
+            test: /\.js$/
+          }
+        }),
         new webpack.ProgressPlugin(),
         isAnalyzerEnable &&
           new BundleAnalyzerPlugin({
@@ -243,6 +256,7 @@ const getPlugin = () => {
 
 function getConfig() {
   const config = {
+    target: 'web',
     mode: env,
     devtool: isEnvProduction ? 'source-map' : 'cheap-module-eval-source-map',
     context: resolve(),
@@ -253,7 +267,8 @@ function getConfig() {
       path: destPath,
       filename: isEnvProduction ? 'static/js/[name].[chunkhash:8].js' : 'static/js/bundle.js',
       chunkFilename: isEnvProduction ? 'static/js/[name].[chunkhash:8].chunk.js' : 'static/js/[name].chunk.js',
-      publicPath: isEnvProduction ? publicPath : '/'
+      publicPath: isEnvProduction ? publicPath : '/',
+      crossOriginLoading: isEnvProduction ? 'anonymous' : false
     },
     optimization: getOptimization(),
     resolve: {
