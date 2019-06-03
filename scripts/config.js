@@ -226,7 +226,7 @@ const getPlugin = () => {
               test: /[\\/]node_modules[\\/]react/,
               priority: -20
             },
-            vendors: {
+            third: {
               // 所有node_modules的单独打一个包
               test: /[\\/]node_modules[\\/]/,
               priority: -100
@@ -261,7 +261,7 @@ function getConfig() {
     devtool: isEnvProduction ? 'source-map' : 'cheap-module-eval-source-map',
     context: resolve(),
     entry: {
-      index: resolve('src/index.js')
+      app: [resolve('src/index.js')]
     },
     output: {
       path: destPath,
