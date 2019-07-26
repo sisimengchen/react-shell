@@ -1,9 +1,8 @@
-const { isEnvProduction, isMockEnable, isHttpsEnable, proxy } = require('./environment');
+const { isEnvDevelopment, isMockEnable, isHttpsEnable, proxy } = require('./environment');
 const { ip } = require('./utils');
 
-module.exports = isEnvProduction
-  ? {}
-  : {
+module.exports = isEnvDevelopment
+  ? {
     before: (app) => {
       isMockEnable && require('./mock')(app);
     },
@@ -24,4 +23,5 @@ module.exports = isEnvProduction
     watchOptions: {
       poll: false
     }
-  };
+  }
+  : {};

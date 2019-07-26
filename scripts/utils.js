@@ -1,18 +1,20 @@
 const path = require('path');
+const chalk = require('chalk');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { isEnvProduction } = require('./environment');
+const { isEnvDevelopment } = require('./environment');
 
 const resolve = (p = '') => path.resolve(__dirname, '../', p);
 
 const getCssLoaders = (cssOptions = {}) => {
   const loaders = [
     {
-      loader: isEnvProduction ? MiniCssExtractPlugin.loader : 'style-loader'
+      loader: isEnvDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader
     },
     {
       loader: 'css-loader',
       options: {
-        sourceMap: !isEnvProduction,
+        sourceMap: isEnvDevelopment,
         ...cssOptions
       }
     },
@@ -20,7 +22,7 @@ const getCssLoaders = (cssOptions = {}) => {
       loader: 'postcss-loader',
       options: {
         ident: 'postcss',
-        sourceMap: !isEnvProduction
+        sourceMap: isEnvDevelopment
       }
     }
   ];
@@ -32,11 +34,9 @@ const getLessLoaders = () => {
   loaders.push({
     loader: 'less-loader',
     options: {
-      sourceMap: !isEnvProduction,
-      javascriptEnabled: true,
-      paths: [
-        path.resolve(__dirname, '../', 'node_modules')
-      ]
+      sourceMap: isEnvDevelopment,
+      javascriptEnabled: true
+      // paths: [path.resolve(__dirname, '../', 'node_modules')]
     }
   });
   return loaders;
@@ -47,7 +47,7 @@ const getScssLoaders = () => {
   loaders.push({
     loader: 'sass-loader',
     options: {
-      sourceMap: !isEnvProduction
+      sourceMap: isEnvDevelopment
     }
   });
   return loaders;
@@ -58,7 +58,7 @@ const getStylusLoaders = () => {
   loaders.push({
     loader: 'stylus-loader',
     options: {
-      sourceMap: !isEnvProduction
+      sourceMap: isEnvDevelopment
     }
   });
   return loaders;
@@ -87,11 +87,36 @@ const ip = () => {
   return !all.length ? ip.loopback(family) : all[0];
 };
 
+const build = (webpackConfig = {}, callback) => {
+  const compiler = webpack(webpackConfig);
+  compiler.run((err, stats) => {
+    if (err) {
+      throw err;
+    }
+    process.stdout.write(`${stats.toString({
+      colors: true,
+      modules: false,
+      children: false, // if you are using ts-loader, setting this to true will make tyescript errors show up during build
+      chunks: false,
+      chunkModules: false
+    })}\n\n`);
+    if (stats.hasErrors()) {
+      console.log(chalk.red('  Build failed with errors.\n'));
+      process.exit(1);
+    }
+    console.log(chalk.cyan('  Build complete.\n'));
+    console.log(chalk.yellow('  Tip: built files are meant to be served over an HTTP server.\n' +
+          "  Opening index.html over file:// won't work.\n"));
+    callback && callback();
+  });
+};
+
 module.exports = {
   resolve,
   getCssLoaders,
   getLessLoaders,
   getScssLoaders,
   getStylusLoaders,
-  ip
+  ip,
+  build
 };
