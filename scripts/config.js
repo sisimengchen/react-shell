@@ -12,7 +12,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HappyPack = require('happypack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const { resolve, getCssLoaders, getLessLoaders, getScssLoaders, getStylusLoaders } = require('./utils');
+const { resolve, getCssLoaders, getLessLoaders, getScssLoaders, getStylusLoaders, getHasha } = require('./utils');
 const {
   version,
   env,
@@ -175,7 +175,9 @@ const getPlugin = () => {
       favicon: resolve('src/template/favicon.ico'),
       gtag: 'UA-135935262-1',
       zoom: `<script>${fs.readFileSync(resolve('src/template/zoom.js'))}</script>`,
-      dll: `<script type="text/javascript" src="./static/js/dependencies.js" crossorigin="anonymous"></script>`,
+      dll: dllDir
+        ? `<script type="text/javascript" src="${publicPath}static/js/dependencies.js?v=${getHasha(path.join(dllDir, 'dependencies.js'))}" crossorigin="anonymous"></script>`
+        : '',
       loading: {
         html: fs.readFileSync(resolve('src/template/loading/index.html')),
         css: `<style>${fs.readFileSync(resolve('src/template/loading/index.css'))}</style>`

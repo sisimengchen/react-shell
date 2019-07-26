@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { isEnvDevelopment } = require('./environment');
-
+const hasha = require('hasha');
 const resolve = (p = '') => path.resolve(__dirname, '../', p);
 
 const getCssLoaders = (cssOptions = {}) => {
@@ -111,6 +111,12 @@ const build = (webpackConfig = {}, callback) => {
   });
 };
 
+const getHasha = (filename) => {
+  return hasha.fromFileSync(filename, {
+    algorithm: 'md5'
+  }); // 生成hashcode
+};
+
 module.exports = {
   resolve,
   getCssLoaders,
@@ -118,5 +124,6 @@ module.exports = {
   getScssLoaders,
   getStylusLoaders,
   ip,
-  build
+  build,
+  getHasha
 };
