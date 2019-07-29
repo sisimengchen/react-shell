@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import history from 'core/history';
 import { signin } from 'agent';
-import Waiting from 'components/waiting';
+import Waiting from 'components/Waiting';
 import './index.scss';
 
 class SigninPage extends PureComponent {

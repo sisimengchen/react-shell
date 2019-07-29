@@ -8,6 +8,10 @@
     "dll": "node scripts/build.dll.js",
     "build": "node scripts/build.dll.js && node scripts/build.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sisimengchen/react-shell.git"
+  },
   "keywords": [
     "react",
     "shell"
