@@ -12,7 +12,7 @@ RUN apk add --no-cache --virtual .gyp \
     && apk del .gyp
 
 RUN export NODE_ENV=production \
-    && export PUBLIC_PATH=//www.mcaws.com:8080/ \
+    && export PUBLIC_PATH=//www.mcaws.com/ \
     && npm run build
 
 FROM nginx:1.17.2 as prod
