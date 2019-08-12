@@ -8,7 +8,6 @@ module.exports = function(api) {
       require('@babel/preset-env').default,
       {
         debug: devMode,
-        targets: { browsers: ['Android >= 4.0', 'ios >= 8', 'ie >=9'] },
         modules: false,
         useBuiltIns: 'usage',
         corejs: {

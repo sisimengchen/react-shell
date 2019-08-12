@@ -3,26 +3,8 @@
   "version": "1.0.0",
   "description": "An shell for my react-app",
   "main": "index.js",
-  "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config scripts/config.js",
-    "dll": "node scripts/build.dll.js",
-    "build": "node scripts/build.dll.js && node scripts/build.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sisimengchen/react-shell.git"
-  },
-  "keywords": [
-    "react",
-    "shell"
-  ],
-  "author": "mengchen",
   "license": "MIT",
-  "browserslist": [
-    "> 0.1%",
-    "last 10 versions",
-    "not ie <= 9"
-  ],
+  "author": "mengchen",
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -82,5 +64,24 @@
     "redux-logger": "3.0.6",
     "redux-thunk": "2.3.0",
     "styled-components": "4.3.2"
-  }
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --inline --progress --config scripts/config.js",
+    "dll": "node scripts/build.dll.js",
+    "build": "node scripts/build.dll.js && node scripts/build.js"
+  },
+  "keywords": [
+    "react",
+    "shell"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sisimengchen/react-shell.git"
+  },
+  "homepage": "https://github.com/sisimengchen/react-shell",
+  "browserslist": [
+    "Android >= 4.0",
+    "ios >= 8",
+    "ie >= 9"
+  ]
 }
