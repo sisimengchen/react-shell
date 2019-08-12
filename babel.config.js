@@ -17,7 +17,7 @@ module.exports = function(api) {
       }
     ],
     [
-      require('@babel/preset-react'),
+      require('@babel/preset-react').default,
       {
         development: devMode
       }
@@ -26,7 +26,7 @@ module.exports = function(api) {
   const plugins = [
     [require('@babel/plugin-transform-runtime').default, { corejs: 3 }],
     [require('@babel/plugin-proposal-decorators').default, { legacy: true }],
-    require('@babel/plugin-proposal-class-properties'),
+    require('@babel/plugin-proposal-class-properties').default,
     require('@babel/plugin-syntax-dynamic-import').default
   ].filter(Boolean);
 
