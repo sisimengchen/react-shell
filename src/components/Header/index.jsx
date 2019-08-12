@@ -24,7 +24,7 @@ class Header extends Component {
           {this.props.back ? (
             <a
               className="back"
-              href="javascript:void(0)"
+              href={null}
               onClick={() => {
                 if (this.props.back.length) {
                   history.push(this.props.back);

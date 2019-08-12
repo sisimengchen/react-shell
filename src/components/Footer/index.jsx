@@ -14,7 +14,7 @@ export default class Footer extends Component {
   render() {
     return (
       <footer id="components-footer">
-        <section class="copyright">Copyright (c) 2019-present sisimengchen@gmail.com.</section>
+        <section className="copyright">Copyright (c) 2019-present sisimengchen@gmail.com.</section>
       </footer>
     );
   }
