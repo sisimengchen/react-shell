@@ -20,7 +20,7 @@
     "copy-webpack-plugin": "^4.5.1",
     "core-js": "^3.2.0",
     "css-loader": "^3.2.0",
-    "eslint": "^6.1.0",
+    "eslint": "^5.16.0",
     "eslint-config-lmfe": "0.0.1",
     "file-loader": "^4.2.0",
     "happypack": "^5.0.1",
